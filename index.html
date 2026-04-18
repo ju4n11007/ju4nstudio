@@ -1,373 +1,613 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ju4n · escritor & desarrollador web</title>
-<meta name="description" content="Tengo 17 años y creo webs profesionales, ebooks de informática y novelas de suspenso. Contactame para tu próximo proyecto.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Outfit:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
-<style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --bg:#06060f;--bg2:#0c0c1e;--bg3:#111128;
-  --text:#eeeeff;--muted:#6a6a98;--faint:#18183a;
-  --blue:#4f6cff;--blue-lt:#8fa8ff;--blue-dim:rgba(79,108,255,.12);
-  --gold:#ffab30;--red:#ff4a6b;
-  --border:rgba(238,238,255,.07);--border2:rgba(238,238,255,.15);
-}
-html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font-size:15px;line-height:1.65;overflow-x:hidden}
-body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");opacity:.025}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>JU4N Studio · Desarrollo web + soluciones técnicas · Chile</title>
+    <meta name="description" content="Soy JU4N, desarrollador frontend chileno de 17 años. Creo páginas web que venden, escribo ebooks y hago servicios técnicos. Transformo ideas en realidad digital.">
+    <!-- Favicon fácil de recordar: un diamante con J4 -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23111827' rx='24'/><text x='50' y='72' font-size='56' text-anchor='middle' fill='white' font-weight='bold' font-family='Arial, sans-serif'>J4</text><circle cx='75' cy='25' r='8' fill='%23f97316'/></svg>">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23111827' rx='24'/><text x='50' y='72' font-size='56' text-anchor='middle' fill='white' font-weight='bold' font-family='Arial, sans-serif'>J4</text><circle cx='75' cy='25' r='8' fill='%23f97316'/></svg>">
+    <meta name="theme-color" content="#111827">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-/* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:200;height:58px;padding:0 3rem;display:flex;align-items:center;justify-content:space-between;background:rgba(6,6,15,.85);backdrop-filter:blur(18px);border-bottom:1px solid var(--border)}
-.nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none}
-.nav-sq{width:32px;height:32px;background:var(--blue);border-radius:6px;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:13px;color:#fff}
-.nav-name{font-family:'Syne',sans-serif;font-weight:700;font-size:17px;color:var(--text)}
-.nav-links{display:flex;list-style:none;gap:2rem}
-.nav-links a{font-size:13px;color:var(--muted);text-decoration:none;letter-spacing:.03em;transition:color .2s}
-.nav-links a:hover{color:var(--text)}
-.nav-cta{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#fff;background:var(--blue);padding:8px 20px;border-radius:6px;text-decoration:none;transition:background .2s,transform .15s}
-.nav-cta:hover{background:var(--blue-lt);transform:translateY(-1px)}
+        body {
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, sans-serif;
+            background: #ffffff;
+            color: #111827;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
 
-/* HERO */
-.hero{min-height:100vh;padding-top:58px;display:grid;grid-template-columns:1fr 460px;position:relative;overflow:hidden}
-.hero-glow{position:absolute;top:-250px;left:-150px;width:700px;height:700px;background:radial-gradient(circle,rgba(79,108,255,.16) 0%,transparent 68%);pointer-events:none;animation:drift 9s ease-in-out infinite alternate}
-.hero-glow2{position:absolute;bottom:-200px;right:0;width:500px;height:500px;background:radial-gradient(circle,rgba(255,171,48,.07) 0%,transparent 68%);pointer-events:none}
-@keyframes drift{to{transform:translate(60px,50px)}}
-.hero-main{padding:7rem 4rem 5rem;display:flex;flex-direction:column;justify-content:flex-end;position:relative;z-index:1;border-right:1px solid var(--border)}
-.hero-eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--blue-lt);margin-bottom:2rem}
-.hero-eyebrow::before{content:'';width:24px;height:1px;background:var(--blue)}
-.hero-title{font-family:'Syne',sans-serif;font-size:clamp(3rem,5.5vw,5.5rem);font-weight:800;line-height:.92;letter-spacing:-2.5px;color:var(--text);margin-bottom:1.8rem}
-.hero-title .outline{-webkit-text-stroke:1.5px var(--blue-lt);color:transparent;display:block}
-.hero-title .gold{color:var(--gold)}
-.hero-sub{font-size:16px;line-height:1.65;color:var(--muted);max-width:450px;margin-bottom:3rem}
-.hero-sub strong{color:var(--text);font-weight:500}
-.hero-actions{display:flex;gap:1rem;flex-wrap:wrap}
-.btn-blue{font-size:13px;font-weight:600;letter-spacing:.05em;color:#fff;background:var(--blue);padding:13px 28px;border-radius:6px;text-decoration:none;transition:background .2s,transform .15s;display:inline-block}
-.btn-blue:hover{background:var(--blue-lt);transform:translateY(-2px)}
-.btn-outline{font-size:13px;font-weight:500;color:var(--text);border:1px solid var(--border2);padding:13px 28px;border-radius:6px;text-decoration:none;transition:border-color .2s,color .2s;display:inline-block}
-.btn-outline:hover{border-color:var(--blue-lt);color:var(--blue-lt)}
-.hero-side{padding:7rem 3rem 5rem;display:flex;flex-direction:column;justify-content:flex-end;position:relative;z-index:1}
-.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-bottom:2rem}
-.stat-card{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:1.25rem 1.25rem 1rem;transition:border-color .2s,transform .2s}
-.stat-card:hover{border-color:var(--blue);transform:translateY(-2px)}
-.stat-num{font-family:'Syne',sans-serif;font-size:2.1rem;font-weight:800;line-height:1;color:var(--text);margin-bottom:.3rem}
-.stat-num sup{font-size:.9rem;color:var(--blue);vertical-align:super}
-.stat-lbl{font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
-.avail{display:inline-flex;align-items:center;gap:8px;background:var(--bg2);border:1px solid var(--border);border-radius:100px;padding:9px 16px;margin-bottom:1.5rem;font-size:12px;color:var(--muted)}
-.dot{width:7px;height:7px;border-radius:50%;background:#22c55e;flex-shrink:0;animation:pg 1.8s ease-in-out infinite}
-@keyframes pg{0%,100%{box-shadow:0 0 0 0 rgba(34,197,94,.4)}50%{box-shadow:0 0 0 5px transparent}}
-.hero-quote{font-family:'Cormorant Garamond',serif;font-size:19px;font-style:italic;line-height:1.5;color:var(--muted);border-left:2px solid var(--gold);padding-left:1.1rem}
-.hero-quote cite{display:block;font-size:11px;font-style:normal;margin-top:.5rem;color:var(--muted);letter-spacing:.08em;opacity:.5}
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
 
-/* TICKER */
-.ticker{overflow:hidden;background:var(--blue);padding:11px 0}
-.ticker-inner{display:flex;width:max-content;animation:tick 24s linear infinite}
-.ticker-inner:hover{animation-play-state:paused}
-.ticker-item{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.82);white-space:nowrap;padding:0 2.5rem;border-right:1px solid rgba(255,255,255,.18)}
-
-@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-
-/* SECTIONS */
-section{padding:7rem 4rem;position:relative}
-.s-label{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--blue-lt);margin-bottom:3.5rem;display:flex;align-items:center;gap:.75rem}
-.s-label::before{content:'//';color:var(--blue);font-weight:700;font-family:'Syne',sans-serif}
-.s-title{font-family:'Syne',sans-serif;font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:800;letter-spacing:-1.5px;color:var(--text);margin-bottom:1rem}
-.s-sub{font-size:15.5px;color:var(--muted);max-width:500px;margin-bottom:4rem;line-height:1.65}
-
-/* SERVICIOS */
-#servicios{border-top:1px solid var(--border)}
-.srv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5px;background:var(--border);border:1px solid var(--border);border-radius:14px;overflow:hidden}
-.srv-card{background:var(--bg);padding:2.5rem 2rem;position:relative;overflow:hidden;transition:background .3s}
-.srv-card:hover{background:var(--bg3)}
-.srv-card::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at top left,var(--blue-dim),transparent 55%);opacity:0;transition:opacity .35s}
-.srv-card:hover::before{opacity:1}
-.srv-n{font-size:10px;letter-spacing:.2em;color:var(--faint);margin-bottom:2rem;display:block;font-family:'Syne',sans-serif;font-weight:700}
-.srv-icon{width:44px;height:44px;border-radius:10px;background:var(--blue-dim);border:1px solid rgba(79,108,255,.3);display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:1.5rem;transition:background .3s,transform .3s}
-.srv-card:hover .srv-icon{background:var(--blue);transform:scale(1.06)}
-.srv-title{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700;color:var(--text);margin-bottom:.7rem}
-.srv-desc{font-size:13.5px;color:var(--muted);line-height:1.65;margin-bottom:1.5rem}
-.srv-tags{display:flex;flex-wrap:wrap;gap:6px}
-.tag{font-size:10px;letter-spacing:.06em;padding:4px 10px;border-radius:5px;background:var(--faint);color:var(--muted);border:1px solid var(--border);transition:all .2s}
-.srv-card:hover .tag{background:var(--blue-dim);color:var(--blue-lt);border-color:rgba(79,108,255,.3)}
-
-/* EBOOKS */
-#escritura{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
-.books-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
-.book-card{background:var(--bg);border:1px solid var(--border);border-radius:14px;padding:2.25rem 2rem;text-decoration:none;display:block;transition:border-color .25s,transform .25s,box-shadow .25s;position:relative;overflow:hidden}
-.book-card:hover{border-color:var(--blue);transform:translateY(-5px);box-shadow:0 24px 48px rgba(6,6,15,.7),0 0 0 1px var(--blue)}
-.book-bar{height:3px;border-radius:2px;margin-bottom:1.75rem;background:linear-gradient(90deg,var(--blue),var(--blue-lt))}
-.book-card.gold .book-bar{background:linear-gradient(90deg,var(--gold),#ffe0a0)}
-.book-card.dimmed{opacity:.6}
-.book-card.dimmed:hover{opacity:.85}
-.book-genre{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--blue-lt);margin-bottom:.75rem;display:block}
-.book-card.gold .book-genre{color:var(--gold)}
-.book-title{font-family:'Syne',sans-serif;font-size:1.15rem;font-weight:700;color:var(--text);margin-bottom:.75rem;line-height:1.2}
-.book-desc{font-size:13px;color:var(--muted);line-height:1.65;margin-bottom:1.5rem}
-.book-cta{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--blue-lt);display:flex;align-items:center;gap:6px;transition:gap .2s}
-.book-card:hover .book-cta{gap:10px}
-.book-card.gold .book-cta{color:var(--gold)}
-.books-footer{margin-top:2.5rem;text-align:center;font-size:13px;color:var(--muted)}
-.books-footer a{color:var(--blue-lt);text-decoration:none}
-.books-footer a:hover{text-decoration:underline}
-
-/* PROYECTOS */
-#webdev{border-top:1px solid var(--border)}
-.proj-row{display:grid;grid-template-columns:52px 1fr auto 44px;align-items:center;gap:2rem;padding:2rem 1rem;border-bottom:1px solid var(--border);text-decoration:none;border-radius:8px;transition:background .2s,padding .25s}
-.proj-row:hover{background:var(--bg3);padding-left:2rem}
-.proj-n{font-size:11px;color:var(--faint);font-family:'Syne',sans-serif;font-weight:700;letter-spacing:.1em}
-.proj-name{font-family:'Syne',sans-serif;font-size:1.35rem;font-weight:700;color:var(--text);line-height:1.15}
-.proj-desc{font-size:13px;color:var(--muted);margin-top:4px}
-.proj-stack{font-size:11px;color:var(--muted);background:var(--faint);padding:5px 12px;border-radius:100px;border:1px solid var(--border);white-space:nowrap}
-.proj-arr{width:36px;height:36px;border-radius:50%;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:15px;transition:background .2s,border-color .2s,color .2s,transform .2s}
-.proj-row:hover .proj-arr{background:var(--blue);border-color:var(--blue);color:#fff;transform:rotate(-42deg)}
-.proj-bottom{margin-top:2.5rem;display:flex;align-items:center;justify-content:space-between;padding:1.5rem;background:var(--bg2);border:1px solid var(--border);border-radius:10px}
-.proj-bottom p{font-size:13px;color:var(--muted)}
-.proj-bottom strong{color:var(--text);font-weight:500}
-
-/* POR QUÉ */
-#porque{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
-.reasons-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem}
-.reason{background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:2rem;display:flex;gap:1.25rem;transition:border-color .2s,transform .2s}
-.reason:hover{border-color:var(--blue);transform:translateY(-3px)}
-.reason-icon{width:42px;height:42px;border-radius:9px;flex-shrink:0;background:var(--blue-dim);border:1px solid rgba(79,108,255,.3);display:flex;align-items:center;justify-content:center;font-size:19px;margin-top:2px}
-.reason-title{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;color:var(--text);margin-bottom:.4rem}
-.reason-desc{font-size:13.5px;color:var(--muted);line-height:1.65}
-
-/* CONTACTO */
-#contacto{padding:0}
-.contact-wrap{background:linear-gradient(130deg,#090928 0%,#0d0d20 60%,#09091a 100%);border-top:1px solid var(--border);padding:7rem 4rem;position:relative;overflow:hidden}
-.contact-wrap::before{content:'';pointer-events:none;position:absolute;top:-280px;right:-180px;width:580px;height:580px;background:radial-gradient(circle,rgba(79,108,255,.2) 0%,transparent 65%)}
-.contact-wrap::after{content:'';pointer-events:none;position:absolute;bottom:-180px;left:8%;width:380px;height:380px;background:radial-gradient(circle,rgba(255,171,48,.09) 0%,transparent 65%)}
-.contact-grid{display:grid;grid-template-columns:1fr 400px;gap:5rem;position:relative;z-index:1}
-.contact-hl{font-family:'Syne',sans-serif;font-size:clamp(2.2rem,4.5vw,3.8rem);font-weight:800;letter-spacing:-1.8px;line-height:.95;color:var(--text);margin-bottom:1.5rem}
-.contact-hl em{color:var(--blue-lt);font-style:italic}
-.contact-p{font-size:16px;color:var(--muted);line-height:1.65;margin-bottom:2.5rem}
-.contact-p strong{color:var(--text);font-weight:500}
-.c-links{display:flex;flex-direction:column}
-.c-link{display:flex;align-items:center;justify-content:space-between;padding:1.2rem 0;border-bottom:1px solid var(--border);text-decoration:none;border-radius:6px;transition:padding .2s}
-.c-link:hover{padding-left:.75rem}
-.c-lbl{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:3px}
-.c-val{font-size:14px;color:var(--text);transition:color .2s}
-.c-link:hover .c-val{color:var(--blue-lt)}
-.c-arr{width:30px;height:30px;border-radius:50%;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:13px;flex-shrink:0;transition:background .2s,color .2s,border-color .2s}
-.c-link:hover .c-arr{background:var(--blue);border-color:var(--blue);color:#fff}
-
-/* FOOTER */
-footer{background:var(--bg);border-top:1px solid var(--border);padding:1.75rem 4rem;display:flex;align-items:center;justify-content:space-between}
-.f-brand{display:flex;align-items:center;gap:8px;text-decoration:none}
-.f-sq{width:24px;height:24px;background:var(--blue);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:10px;color:#fff;font-family:'Syne',sans-serif;font-weight:800}
-.f-name{font-family:'Syne',sans-serif;font-weight:700;font-size:15px;color:var(--text)}
-.f-copy{font-size:12px;color:var(--muted)}
-.f-links{display:flex;gap:1.5rem}
-.f-links a{font-size:12px;color:var(--muted);text-decoration:none;letter-spacing:.04em;transition:color .2s}
-.f-links a:hover{color:var(--blue-lt)}
-
-/* REVEAL */
-.r{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
-.r.v{opacity:1;transform:none}
-.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}
-
-/* MOBILE */
-@media(max-width:960px){
-  .hero{grid-template-columns:1fr}
-  .hero-side{border-top:1px solid var(--border);padding:3rem 2rem 4rem}
-  .hero-main{padding:6rem 2rem 3rem}
-  .srv-grid,.books-grid,.reasons-grid{grid-template-columns:1fr}
-  .contact-grid{grid-template-columns:1fr;gap:3rem}
-  .proj-row{grid-template-columns:1fr auto}
-  .proj-n,.proj-stack{display:none}
-  section{padding:5rem 1.5rem}
-  nav{padding:0 1.5rem}
-  .nav-links{display:none}
-  footer{flex-direction:column;gap:1rem;text-align:center;padding:1.5rem}
-  .contact-wrap{padding:5rem 1.5rem}
-}
-</style>
+        .text-center { text-align: center; }
+        .mt-1 { margin-top: 1rem; }
+        .mt-2 { margin-top: 2rem; }
+        .mb-1 { margin-bottom: 1rem; }
+        .mb-2 { margin-bottom: 2rem; }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 14px 32px;
+            border-radius: 48px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.25s ease;
+            cursor: pointer;
+            border: none;
+            font-family: inherit;
+        }
+        
+        .btn-primary {
+            background: #111827;
+            color: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        
+        .btn-primary:hover {
+            background: #1f2937;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 1.5px solid #111827;
+            color: #111827;
+        }
+        
+        .btn-outline:hover {
+            background: #f9fafb;
+            transform: translateY(-2px);
+        }
+        
+        .btn-donation {
+            background: linear-gradient(135deg, #f97316, #ea580c);
+            color: white;
+            border: none;
+            box-shadow: 0 2px 8px rgba(249,115,22,0.2);
+        }
+        
+        .btn-donation:hover {
+            background: linear-gradient(135deg, #ea580c, #c2410c);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(249,115,22,0.3);
+        }
+        
+        section {
+            padding: 80px 0;
+            border-bottom: 1px solid #f0f2f5;
+        }
+        
+        section:last-of-type {
+            border-bottom: none;
+        }
+        
+        h2 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            margin-bottom: 2.5rem;
+            color: #111827;
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.01em;
+        }
+        
+        .grid-2, .grid-3 {
+            display: grid;
+            gap: 2rem;
+        }
+        
+        .grid-3 {
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+        
+        .grid-2 {
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        }
+        
+        .card {
+            background: #ffffff;
+            padding: 2rem;
+            border-radius: 28px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.02), 0 0 0 1px #eef2f6;
+            transition: all 0.2s ease;
+        }
+        
+        .card:hover {
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.08), 0 0 0 1px #e2e8f0;
+            transform: translateY(-3px);
+        }
+        
+        .service-icon {
+            font-size: 2.4rem;
+            margin-bottom: 1.2rem;
+        }
+        
+        .benefit-list {
+            list-style: none;
+            margin-top: 1.2rem;
+        }
+        
+        .benefit-list li {
+            margin-bottom: 0.6rem;
+            padding-left: 1.6rem;
+            position: relative;
+            font-size: 0.95rem;
+        }
+        
+        .benefit-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #111827;
+            font-weight: bold;
+        }
+        
+        .project-card {
+            background: #fafcff;
+            border-radius: 28px;
+            padding: 1.8rem;
+            transition: 0.2s;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.02), 0 0 0 1px #edf2f7;
+        }
+        
+        .project-card a {
+            display: inline-block;
+            margin-top: 1.2rem;
+            font-weight: 600;
+            color: #111827;
+            text-decoration: underline;
+            text-underline-offset: 6px;
+        }
+        
+        .hero {
+            padding: 100px 0 80px 0;
+            background: #ffffff;
+        }
+        
+        .hero h1 {
+            font-size: 3.4rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1.2;
+            max-width: 880px;
+            margin-bottom: 1.2rem;
+        }
+        
+        .hero-sub {
+            font-size: 1.2rem;
+            color: #374151;
+            max-width: 620px;
+            margin-bottom: 2rem;
+        }
+        
+        .button-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            align-items: center;
+        }
+        
+        .process-steps {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            justify-content: space-between;
+        }
+        
+        .step {
+            flex: 1;
+            background: #f9fafb;
+            border-radius: 32px;
+            padding: 1.8rem 1.2rem;
+            text-align: center;
+            font-weight: 500;
+            border: 1px solid #eef2f8;
+        }
+        
+        .step-number {
+            font-weight: 800;
+            font-size: 2rem;
+            color: #111827;
+            margin-bottom: 0.6rem;
+        }
+        
+        footer {
+            background: #fafbfc;
+            padding: 48px 0;
+            text-align: center;
+            border-top: 1px solid #eef2f5;
+        }
+        
+        .contact-cta {
+            background: #111827;
+            color: white;
+            border-radius: 48px;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+        
+        .contact-cta h3 {
+            color: white;
+            font-size: 2rem;
+        }
+        
+        .contact-cta .btn-light {
+            background: white;
+            color: #111827;
+            margin-top: 1rem;
+            display: inline-flex;
+            padding: 14px 32px;
+            border-radius: 48px;
+            font-weight: 600;
+            text-decoration: none;
+        }
+        
+        .contact-cta .btn-light:hover {
+            background: #f3f4f6;
+            transform: translateY(-2px);
+        }
+        
+        .badge-country {
+            display: inline-block;
+            background: #f3f4f6;
+            padding: 6px 14px;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-bottom: 1.2rem;
+        }
+        
+        .preview-simbolo {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #111827 0%, #1f2937 100%);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 60px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        
+        .preview-simbolo span {
+            font-size: 1.2rem;
+        }
+        
+        .preview-badge {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #111827;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            cursor: pointer;
+            transition: transform 0.2s;
+            text-decoration: none;
+        }
+        
+        .preview-badge:hover {
+            transform: scale(1.05);
+            background: #1f2937;
+        }
+        
+        .donation-section {
+            background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
+            border-radius: 32px;
+            padding: 2rem;
+            text-align: center;
+            border: 1px solid #fed7aa;
+            margin-top: 1rem;
+        }
+        
+        .donation-section p {
+            color: #7c2d12;
+            margin-bottom: 1rem;
+        }
+        
+        .donation-note {
+            font-size: 0.8rem;
+            color: #9a3412;
+            margin-top: 0.75rem;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 20px;
+            }
+            section {
+                padding: 56px 0;
+            }
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            h2 {
+                font-size: 1.8rem;
+            }
+            .button-group {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .btn {
+                justify-content: center;
+            }
+            .process-steps {
+                flex-direction: column;
+            }
+            .contact-cta h3 {
+                font-size: 1.6rem;
+            }
+            .preview-badge {
+                bottom: 16px;
+                right: 16px;
+                padding: 8px 14px;
+                font-size: 0.7rem;
+            }
+        }
+        
+        hr {
+            margin: 1rem 0;
+            border: none;
+            height: 1px;
+            background: #eef2f8;
+        }
+        
+        .payment-note {
+            font-size: 0.85rem;
+            margin-top: 1rem;
+            opacity: 0.8;
+        }
+    </style>
 </head>
 <body>
 
-<nav>
-  <a href="#" class="nav-brand">
-    <div class="nav-sq">j4</div>
-    <span class="nav-name">ju4n</span>
-  </a>
-  <ul class="nav-links">
-    <li><a href="#servicios">Servicios</a></li>
-    <li><a href="#escritura">Escritura</a></li>
-    <li><a href="#webdev">Proyectos</a></li>
-    <li><a href="#contacto">Contacto</a></li>
-  </ul>
-  <a href="#contacto" class="nav-cta">Escribime →</a>
-</nav>
+<main>
+    <!-- HERO -->
+    <section class="hero">
+        <div class="container">
+            <div class="preview-simbolo">
+                <span>🔗</span> Vista previa activa · Comparte este enlace
+            </div>
+            <div class="badge-country">🇨🇱 Chile · JU4N Studio · 17 años</div>
+            <h1>Creo páginas web modernas y soluciones digitales para hacer crecer tu negocio</h1>
+            <div class="hero-sub">
+                Soy JU4N, desarrollador chileno. También hago contenido digital y servicios técnicos como formateo e instalación de sistemas. 
+                Te ayudo a que tu negocio tenga presencia profesional en internet.
+            </div>
+            <div class="button-group">
+                <a href="servicio.html" class="btn btn-primary">📱 Solicitar servicio</a>
+                <a href="https://www.instagram.com/ju4n_rpf.cll" target="_blank" rel="noopener noreferrer" class="btn btn-outline">📷 Escríbeme por Instagram</a>
+            </div>
+        </div>
+    </section>
 
-<section class="hero">
-  <div class="hero-glow"></div>
-  <div class="hero-glow2"></div>
-  <div class="hero-main">
-    <p class="hero-eyebrow r">escritor · desarrollador web · 17 años</p>
-    <h1 class="hero-title r d1">
-      Construyo webs<br>
-      <span class="outline">que funcionan</span>
-      de <span class="gold">verdad.</span>
-    </h1>
-    <p class="hero-sub r d2">Tengo 17 años y ya entrego proyectos reales. Webs profesionales, tiendas online, ebooks de programación y novelas de suspenso. <strong>Si tenés un proyecto, yo lo ejecuto.</strong></p>
-    <div class="hero-actions r d3">
-      <a href="#contacto" class="btn-blue">Escribime ahora</a>
-      <a href="#servicios" class="btn-outline">Ver lo que hago</a>
-    </div>
-  </div>
-  <div class="hero-side">
-    <div class="stat-grid">
-      <div class="stat-card r"><div class="stat-num"><sup>+</sup>650</div><div class="stat-lbl">Lectores Wattpad</div></div>
-      <div class="stat-card r d1"><div class="stat-num"><sup>+</sup>12</div><div class="stat-lbl">Proyectos entregados</div></div>
-      <div class="stat-card r d2"><div class="stat-num">24<sup style="font-size:.85rem">/7</sup></div><div class="stat-lbl">Disponible</div></div>
-      <div class="stat-card r d3"><div class="stat-num">17</div><div class="stat-lbl">Años y en progreso</div></div>
-    </div>
-    <div class="avail r d4"><div class="dot"></div>Disponible para proyectos · Lun a Jue</div>
-    <blockquote class="hero-quote r d4">"Escribir es teclear emociones y compilar sueños."<cite>— ju4n</cite></blockquote>
-  </div>
-</section>
+    <!-- SERVICIOS -->
+    <section id="servicios">
+        <div class="container">
+            <h2 class="text-center">⚙️ Lo que puedo hacer por ti</h2>
+            <div class="grid-3">
+                <div class="card">
+                    <div class="service-icon">🌐</div>
+                    <h3>Desarrollo web</h3>
+                    <p>Creo páginas para negocios, landing pages que convierten y sitios responsive. Tu marca se ve profesional en cualquier dispositivo.</p>
+                    <ul class="benefit-list">
+                        <li>Más clientes gracias a un sitio web ordenado</li>
+                        <li>SEO básico para que te encuentren en Google</li>
+                        <li>Diseño enfocado en ventas y contactos</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="service-icon">📘</div>
+                    <h3>Contenido digital</h3>
+                    <p>Escribo ebooks y contenido creativo para que compartas tu conocimiento o vendas tus ideas.</p>
+                    <ul class="benefit-list">
+                        <li>Ebooks listos para descargar o vender</li>
+                        <li>Escritura para marcas y proyectos personales</li>
+                        <li>Contenido que conecta con tu audiencia</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="service-icon">🖥️</div>
+                    <h3>Servicio técnico</h3>
+                    <p>Formateo de PC, instalación de Windows/macOS y USB booteables. Dejo tu equipo como nuevo.</p>
+                    <ul class="benefit-list">
+                        <li>Computador más rápido y sin virus</li>
+                        <li>Soporte remoto o presencial (Chile)</li>
+                        <li>Precios accesibles para estudiantes y emprendedores</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<div class="ticker">
-  <div class="ticker-inner">
-    <span class="ticker-item">HTML & CSS</span><span class="ticker-item">JavaScript</span><span class="ticker-item">React & Next.js</span><span class="ticker-item">Python</span><span class="ticker-item">Shopify</span><span class="ticker-item">WooCommerce</span><span class="ticker-item">Diseño responsive</span><span class="ticker-item">Ebooks técnicos</span><span class="ticker-item">Novelas de suspenso</span><span class="ticker-item">PHP & WordPress</span><span class="ticker-item">Tiendas online</span><span class="ticker-item">Portafolios creativos</span><span class="ticker-item">HTML & CSS</span><span class="ticker-item">JavaScript</span><span class="ticker-item">React & Next.js</span><span class="ticker-item">Python</span><span class="ticker-item">Shopify</span><span class="ticker-item">WooCommerce</span><span class="ticker-item">Diseño responsive</span><span class="ticker-item">Ebooks técnicos</span><span class="ticker-item">Novelas de suspenso</span><span class="ticker-item">PHP & WordPress</span><span class="ticker-item">Tiendas online</span><span class="ticker-item">Portafolios creativos</span>
-  </div>
-</div>
+    <!-- PROYECTOS -->
+    <section id="proyectos">
+        <div class="container">
+            <h2 class="text-center">✨ Algunos de mis trabajos</h2>
+            <div class="grid-2">
+                <div class="project-card">
+                    <div class="service-icon">🚀</div>
+                    <h3>Jisanicolas.online</h3>
+                    <p>Sitio web profesional, limpio y rápido. Ideal para mostrar servicios y captar clientes. Totalmente responsive.</p>
+                    <a href="https://jisanicolas.online/" target="_blank" rel="noopener noreferrer">Ver proyecto →</a>
+                </div>
+                <div class="project-card">
+                    <div class="service-icon">🤝</div>
+                    <h3>Comunidad VAS</h3>
+                    <p>Portal comunitario con diseño moderno y navegación clara. Conecta personas e información de forma sencilla.</p>
+                    <a href="http://comunidadvas.online/" target="_blank" rel="noopener noreferrer">Ver proyecto →</a>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<section id="servicios">
-  <p class="s-label r">Servicios</p>
-  <h2 class="s-title r d1">Lo que hago</h2>
-  <p class="s-sub r d2">Me especializo en tres áreas que, en mi caso, van de la mano: tecnología, escritura y diseño web. Cada proyecto lo trato como si fuera mío.</p>
-  <div class="srv-grid r d3">
-    <div class="srv-card">
-      <span class="srv-n">01</span>
-      <div class="srv-icon">📚</div>
-      <h3 class="srv-title">Ebooks de informática</h3>
-      <p class="srv-desc">Escribo guías de programación para personas que están empezando desde cero, sin rodeos y con ejemplos reales. También hago novelas de suspenso porque me gusta mezclar mundos.</p>
-      <div class="srv-tags"><span class="tag">Python</span><span class="tag">HTML</span><span class="tag">Thriller</span><span class="tag">Wattpad</span></div>
-    </div>
-    <div class="srv-card">
-      <span class="srv-n">02</span>
-      <div class="srv-icon">🛒</div>
-      <h3 class="srv-title">Tiendas online</h3>
-      <p class="srv-desc">Armo e-commerce que de verdad venden: catálogos prolijos, pasarelas de pago, diseño mobile-first y UX pensada para que el cliente compre sin fricción. Hecho a medida.</p>
-      <div class="srv-tags"><span class="tag">Shopify</span><span class="tag">WooCommerce</span><span class="tag">Custom</span><span class="tag">Responsive</span></div>
-    </div>
-    <div class="srv-card">
-      <span class="srv-n">03</span>
-      <div class="srv-icon">⚡</div>
-      <h3 class="srv-title">Webs & portafolios</h3>
-      <p class="srv-desc">Sitios profesionales que se ven bien y cargan rápido. Landing pages, portafolios creativos, páginas de negocio. Código limpio, animaciones y diseño que se nota que lo hizo alguien.</p>
-      <div class="srv-tags"><span class="tag">HTML/CSS/JS</span><span class="tag">React</span><span class="tag">Next.js</span><span class="tag">PHP</span></div>
-    </div>
-  </div>
-</section>
+    <!-- EBOOKS -->
+    <section id="ebooks">
+        <div class="container text-center">
+            <h2>📖 También escribo ebooks</h2>
+            <p style="font-size: 1.2rem; max-width: 600px; margin: 0 auto 1.8rem auto;">Historias, guías y contenido digital. Revisa mis trabajos en Wattpad.</p>
+            <a href="https://www.wattpad.com/user/Ju4n_007" target="_blank" rel="noopener noreferrer" class="btn btn-primary">📚 Ver mis ebooks</a>
+        </div>
+    </section>
 
-<section id="escritura">
-  <p class="s-label r">Mis libros</p>
-  <h2 class="s-title r d1">Ebooks que escribí</h2>
-  <p class="s-sub r d2">Arranqué a escribir en Wattpad porque quería que aprender a programar fuera más simple para todos. Hoy también escribo ficción porque hay cosas que solo se pueden decir en forma de historia.</p>
-  <div class="books-grid">
-    <a href="https://www.wattpad.com/story/352842818-html-vol-1" target="_blank" class="book-card r">
-      <div class="book-bar"></div>
-      <span class="book-genre">Informática · HTML</span>
-      <h3 class="book-title">HTML Vol. 1</h3>
-      <p class="book-desc">Todo lo que necesitás saber de HTML para empezar a crear páginas web. Sin vueltas, con ejemplos que podés copiar y probar ahora mismo.</p>
-      <span class="book-cta">Leer en Wattpad →</span>
-    </a>
-    <a href="https://www.wattpad.com/user/Ju4n_007" target="_blank" class="book-card r d1">
-      <div class="book-bar"></div>
-      <span class="book-genre">Informática · Python</span>
-      <h3 class="book-title">Python desde 0</h3>
-      <p class="book-desc">Mi ebook más leído. Más de 650 personas ya aprendieron Python con esto. Empezás desde lo básico y terminás haciendo proyectos reales. Sin excusas para no arrancar.</p>
-      <span class="book-cta">+650 lectores · Leer →</span>
-    </a>
-    <div class="book-card gold dimmed r d2">
-      <div class="book-bar"></div>
-      <span class="book-genre">Suspenso · Thriller cibernético</span>
-      <h3 class="book-title">¿Qué es realmente la justicia?</h3>
-      <p class="book-desc">De día, abogado especializado en crímenes digitales. De noche, el delincuente más buscado de la red. Una historia sobre dobles vidas y hasta dónde llegás cuando creés que tenés razón.</p>
-      <span class="book-cta">Próximamente · 2026</span>
-    </div>
-  </div>
-  <p class="books-footer r">Todos mis libros en Wattpad → <a href="https://www.wattpad.com/user/Ju4n_007" target="_blank">@Ju4n_007</a></p>
-</section>
+    <!-- POR QUÉ ELEGIRME -->
+    <section id="porque-elegirme">
+        <div class="container">
+            <h2 class="text-center">🎯 Por qué trabajar conmigo</h2>
+            <div class="grid-3">
+                <div class="card text-center">
+                    <div style="font-size: 2rem;">🧩</div>
+                    <h3>Desarrollo desde cero</h3>
+                    <p>Código limpio y hecho a tu medida, nada de plantillas genéricas.</p>
+                </div>
+                <div class="card text-center">
+                    <div style="font-size: 2rem;">✨</div>
+                    <h3>Diseño moderno</h3>
+                    <p>Me preocupo de que se vea bien y sea fácil de usar.</p>
+                </div>
+                <div class="card text-center">
+                    <div style="font-size: 2rem;">⚡</div>
+                    <h3>Entrega rápida</h3>
+                    <p>No me demoro semanas, cumplo los plazos sin atados.</p>
+                </div>
+                <div class="card text-center">
+                    <div style="font-size: 2rem;">💰</div>
+                    <h3>Precio accesible</h3>
+                    <p>Soluciones potentes a precios justos. Pago seguro vía PayPal.</p>
+                </div>
+                <div class="card text-center">
+                    <div style="font-size: 2rem;">🔧➕🌐</div>
+                    <h3>Soluciones completas</h3>
+                    <p>Web + soporte técnico en un solo lugar. No necesitas buscar más.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<section id="webdev">
-  <p class="s-label r">Proyectos</p>
-  <h2 class="s-title r d1">Lo que ya entregué</h2>
-  <p class="s-sub r d2">Más de 12 proyectos reales en 2024. Acá van algunos que podés ver en vivo.</p>
-  <div>
-    <a href="http://comunidadvas.online/" target="_blank" class="proj-row r">
-      <span class="proj-n">01</span>
-      <div><div class="proj-name">Comunidad VAS</div><div class="proj-desc">Plataforma comunitaria con diseño moderno y secciones interactivas.</div></div>
-      <span class="proj-stack">HTML · CSS · JS · PHP</span>
-      <div class="proj-arr">→</div>
-    </a>
-    <a href="https://jisanicolas.online/" target="_blank" class="proj-row r d1">
-      <span class="proj-n">02</span>
-      <div><div class="proj-name">JiSanNicolas</div><div class="proj-desc">Sitio web profesional, elegante y optimizado para mobile.</div></div>
-      <span class="proj-stack">HTML5 · CSS3 · JS</span>
-      <div class="proj-arr">→</div>
-    </a>
-    <div class="proj-row r d2" style="cursor:default;opacity:.45;pointer-events:none">
-      <span class="proj-n">…</span>
-      <div><div class="proj-name">+10 proyectos más</div><div class="proj-desc">Disponibles bajo consulta directa.</div></div>
-      <span class="proj-stack">Varios stacks</span>
-      <div class="proj-arr" style="opacity:0">→</div>
-    </div>
-  </div>
-  <div class="proj-bottom r">
-    <p><strong>¿Tenés una idea?</strong> La convertimos en realidad juntos.</p>
-    <a href="#contacto" class="btn-blue" style="padding:10px 22px;font-size:12px">Hablar del proyecto →</a>
-  </div>
-</section>
+    <!-- PROCESO -->
+    <section id="proceso">
+        <div class="container">
+            <h2 class="text-center">📌 Cómo trabajamos</h2>
+            <div class="process-steps">
+                <div class="step"><div class="step-number">1</div> Me escribes por Instagram o el formulario</div>
+                <div class="step"><div class="step-number">2</div> Analizamos lo que necesitas</div>
+                <div class="step"><div class="step-number">3</div> Te entrego la solución lista y funcionando</div>
+            </div>
+        </div>
+    </section>
 
-<section id="porque">
-  <p class="s-label r">Por qué elegirme</p>
-  <h2 class="s-title r d1">Lo que me hace diferente</h2>
-  <p class="s-sub r d2">No soy una agencia cara ni alguien que subcontrata todo. Soy yo, enfocado en tu proyecto desde el día uno.</p>
-  <div class="reasons-grid">
-    <div class="reason r"><div class="reason-icon">🎯</div><div><div class="reason-title">Comunicación directa</div><p class="reason-desc">Hablás conmigo, no con un intermediario. Sabés exactamente cómo va tu proyecto en todo momento. Sin demoras ni respuestas automáticas.</p></div></div>
-    <div class="reason r d1"><div class="reason-icon">💻</div><div><div class="reason-title">Código que funciona de verdad</div><p class="reason-desc">No uso plantillas genéricas. Cada proyecto lo armo desde cero con código limpio, responsive y pensado para durar. Lo hago bien o no lo entrego.</p></div></div>
-    <div class="reason r d2"><div class="reason-icon">⚡</div><div><div class="reason-title">Entrega rápida y seria</div><p class="reason-desc">Tengo tiempos definidos y los cumplo. Soy organizado y trabajo con plazos reales. No te voy a dejar esperando semanas sin novedades.</p></div></div>
-    <div class="reason r d3"><div class="reason-icon">📈</div><div><div class="reason-title">Precio justo, calidad pro</div><p class="reason-desc">No tengo una oficina cara que mantener. Eso me permite cobrar de forma accesible y seguir entregando trabajo de calidad real en cada proyecto.</p></div></div>
-  </div>
-</section>
+    <!-- SOBRE MÍ -->
+    <section id="sobre-mi">
+        <div class="container">
+            <div class="grid-2" style="align-items: center;">
+                <div>
+                    <h2>🇨🇱 Sobre mí</h2>
+                    <p style="font-size: 1.15rem; line-height: 1.5;">Soy JU4N, desarrollador frontend y técnico chileno. Tengo 17 años y llevo un tiempo ayudando a negocios y personas a tener presencia digital seria. Creo páginas web desde cero, escribo contenido digital y arreglo problemas técnicos como formateos o instalaciones de sistemas. Me gusta hacer bien la pega y que quedes contento.</p>
+                    <div class="mt-2">
+                        <a href="https://www.instagram.com/ju4n_rpf.cll" target="_blank" class="btn btn-outline">💬 Conoce más de mi trabajo</a>
+                    </div>
+                </div>
+                <div class="text-center" style="background: #f8fafd; border-radius: 32px; padding: 2rem;">
+                    <div style="font-size: 3.5rem;">🧑‍💻</div>
+                    <p style="font-weight: 600;">JU4N Studio · creatividad + tecnología</p>
+                    <hr>
+                    <small>frontend · ebooks · soporte técnico</small>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<section id="contacto" style="padding:0">
-  <div class="contact-wrap">
-    <div class="contact-grid">
-      <div>
-        <h2 class="contact-hl r">¿Arrancamos <em>algo</em> juntos?</h2>
-        <p class="contact-p r d1">Si llegaste hasta acá es porque algo de lo que hago te interesó. <strong>Escribime y hablamos.</strong> Sin compromiso, sin formularios eternos. Te respondo rápido y le buscamos la vuelta.</p>
-        <a href="mailto:juan.brunacontreras@gmail.com" class="btn-blue r d2" style="font-size:14px;padding:14px 32px">Mandarme un email →</a>
-      </div>
-      <div class="c-links">
-        <a href="mailto:juan.brunacontreras@gmail.com" class="c-link r"><div><div class="c-lbl">Email</div><div class="c-val">juan.brunacontreras@gmail.com</div></div><div class="c-arr">↗</div></a>
-        <a href="https://www.instagram.com/ju4n_rpf.cll" target="_blank" class="c-link r d1"><div><div class="c-lbl">Instagram</div><div class="c-val">@ju4n_rpf.cll</div></div><div class="c-arr">↗</div></a>
-        <a href="https://www.wattpad.com/user/Ju4n_007" target="_blank" class="c-link r d2"><div><div class="c-lbl">Wattpad</div><div class="c-val">@Ju4n_007</div></div><div class="c-arr">↗</div></a>
-      </div>
-    </div>
-  </div>
-</section>
+    <!-- DONACIONES OPCIONALES -->
+    <section id="donaciones" style="padding: 40px 0;">
+        <div class="container">
+            <div class="donation-section">
+                <span style="font-size: 2.5rem;">☕✨</span>
+                <h3 style="color: #7c2d12; margin: 0.5rem 0;">¿Te gusta lo que hago?</h3>
+                <p style="font-size: 1rem;">Si mis trabajos te sirven o quieres apoyar a un desarrollador joven chileno, puedes invitarme un café virtual. <strong>Totalmente opcional</strong> 💙</p>
+                <a href="https://paypal.me/JuanBruna007" target="_blank" rel="noopener noreferrer" class="btn btn-donation">
+                    🎁 Donar vía PayPal (opcional)
+                </a>
+                <div class="donation-note">
+                    🙏 Cada aporte me ayuda a seguir aprendiendo y creando mejores soluciones. ¡Gracias de corazón!
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section id="contacto">
+        <div class="container">
+            <div class="contact-cta">
+                <h3>📲 ¿Necesitas una web, ebook o servicio técnico?</h3>
+                <p style="font-size: 1.2rem; margin: 0.8rem 0 0.5rem 0; opacity: 0.95;">Hablemos sin compromiso, te ayudo a encontrar la mejor solución.</p>
+                <a href="https://www.instagram.com/ju4n_rpf.cll" target="_blank" rel="noopener noreferrer" class="btn-light">📩 Escríbeme por Instagram</a>
+                <div class="payment-note">🌎 Trabajo con clientes de todo Chile y el mundo. Acepto pagos seguros mediante PayPal.</div>
+            </div>
+        </div>
+    </section>
+</main>
 
 <footer>
-  <a href="#" class="f-brand"><div class="f-sq">j4</div><span class="f-name">ju4n</span></a>
-  <p class="f-copy">© 2025 · Desarrollador frontend & escritor · Hecho desde los 17</p>
-  <div class="f-links">
-    <a href="https://www.instagram.com/ju4n_rpf.cll" target="_blank">Instagram</a>
-    <a href="https://www.wattpad.com/user/Ju4n_007" target="_blank">Wattpad</a>
-    <a href="mailto:juan.brunacontreras@gmail.com">Email</a>
-  </div>
+    <div class="container">
+        <p style="font-weight: 500;">© 2025 JU4N Studio · Desarrollador frontend & soluciones digitales · Chile</p>
+        <p style="margin-top: 0.5rem; font-size: 0.85rem; color: #4b5563;">Contacto directo por Instagram: @ju4n_rpf.cll</p>
+    </div>
 </footer>
 
+<!-- BOTÓN FLOTANTE CON SÍMBOLO DE VISTA PREVIA -->
+<a href="#" class="preview-badge" id="previewBtn" title="Compartir o previsualizar esta página">
+    <span>🔗</span> Vista previa · Compartir
+</a>
+
 <script>
-const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('v')})},{threshold:.07});
-document.querySelectorAll('.r').forEach(el=>obs.observe(el));
+    const previewBtn = document.getElementById('previewBtn');
+    if (previewBtn) {
+        previewBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('✨ Vista previa lista ✨\n\nEsta página tiene meta tags optimizados para compartir en WhatsApp, Instagram y redes sociales.\n\n📲 Copia el enlace y compártelo: ' + window.location.href);
+            navigator.clipboard.writeText(window.location.href).catch(() => {});
+        });
+    }
+    
+    const heroPreview = document.querySelector('.preview-simbolo');
+    if (heroPreview) {
+        heroPreview.style.cursor = 'pointer';
+        heroPreview.addEventListener('click', () => {
+            alert('🔍 Vista previa optimizada:\n\nCuando compartas este link se verá el título, descripción y un ícono.\n\nAsí tu portafolio se ve profesional en redes sociales.');
+        });
+    }
 </script>
+
 </body>
 </html>
