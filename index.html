@@ -1,613 +1,808 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>JU4N Studio · Desarrollo web + soluciones técnicas · Chile</title>
-    <meta name="description" content="Soy JU4N, desarrollador frontend chileno de 17 años. Creo páginas web que venden, escribo ebooks y hago servicios técnicos. Transformo ideas en realidad digital.">
-    <!-- Favicon fácil de recordar: un diamante con J4 -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23111827' rx='24'/><text x='50' y='72' font-size='56' text-anchor='middle' fill='white' font-weight='bold' font-family='Arial, sans-serif'>J4</text><circle cx='75' cy='25' r='8' fill='%23f97316'/></svg>">
-    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23111827' rx='24'/><text x='50' y='72' font-size='56' text-anchor='middle' fill='white' font-weight='bold' font-family='Arial, sans-serif'>J4</text><circle cx='75' cy='25' r='8' fill='%23f97316'/></svg>">
-    <meta name="theme-color" content="#111827">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Juan Bruna · Currículum Profesional</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        body {
-            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, sans-serif;
-            background: #ffffff;
-            color: #111827;
-            line-height: 1.5;
-            scroll-behavior: smooth;
-        }
+    body {
+      font-family: 'Inter', sans-serif;
+      line-height: 1.5;
+      position: relative;
+      min-height: 100vh;
+      transition: background 0.3s ease;
+    }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
+    /* === MODO OSCURO (variables) === */
+    :root {
+      --card-bg: #ffffff;
+      --card-text: #1e2f3e;
+      --card-border: #e2e8f0;
+      --profile-bg: #f8fafd;
+      --badge-bg: #f0f3f8;
+      --badge-text: #2c6280;
+      --footer-text: #6f8ea3;
+      --header-border: #e2e8f0;
+    }
 
-        .text-center { text-align: center; }
-        .mt-1 { margin-top: 1rem; }
-        .mt-2 { margin-top: 2rem; }
-        .mb-1 { margin-bottom: 1rem; }
-        .mb-2 { margin-bottom: 2rem; }
-        
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            padding: 14px 32px;
-            border-radius: 48px;
-            font-weight: 600;
-            font-size: 1rem;
-            text-decoration: none;
-            transition: all 0.25s ease;
-            cursor: pointer;
-            border: none;
-            font-family: inherit;
-        }
-        
-        .btn-primary {
-            background: #111827;
-            color: white;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-        }
-        
-        .btn-primary:hover {
-            background: #1f2937;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-        }
-        
-        .btn-outline {
-            background: transparent;
-            border: 1.5px solid #111827;
-            color: #111827;
-        }
-        
-        .btn-outline:hover {
-            background: #f9fafb;
-            transform: translateY(-2px);
-        }
-        
-        .btn-donation {
-            background: linear-gradient(135deg, #f97316, #ea580c);
-            color: white;
-            border: none;
-            box-shadow: 0 2px 8px rgba(249,115,22,0.2);
-        }
-        
-        .btn-donation:hover {
-            background: linear-gradient(135deg, #ea580c, #c2410c);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(249,115,22,0.3);
-        }
-        
-        section {
-            padding: 80px 0;
-            border-bottom: 1px solid #f0f2f5;
-        }
-        
-        section:last-of-type {
-            border-bottom: none;
-        }
-        
-        h2 {
-            font-size: 2.2rem;
-            font-weight: 800;
-            letter-spacing: -0.02em;
-            margin-bottom: 2.5rem;
-            color: #111827;
-        }
-        
-        h3 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 0.75rem;
-            letter-spacing: -0.01em;
-        }
-        
-        .grid-2, .grid-3 {
-            display: grid;
-            gap: 2rem;
-        }
-        
-        .grid-3 {
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        }
-        
-        .grid-2 {
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        }
-        
-        .card {
-            background: #ffffff;
-            padding: 2rem;
-            border-radius: 28px;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.02), 0 0 0 1px #eef2f6;
-            transition: all 0.2s ease;
-        }
-        
-        .card:hover {
-            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.08), 0 0 0 1px #e2e8f0;
-            transform: translateY(-3px);
-        }
-        
-        .service-icon {
-            font-size: 2.4rem;
-            margin-bottom: 1.2rem;
-        }
-        
-        .benefit-list {
-            list-style: none;
-            margin-top: 1.2rem;
-        }
-        
-        .benefit-list li {
-            margin-bottom: 0.6rem;
-            padding-left: 1.6rem;
-            position: relative;
-            font-size: 0.95rem;
-        }
-        
-        .benefit-list li::before {
-            content: "✓";
-            position: absolute;
-            left: 0;
-            color: #111827;
-            font-weight: bold;
-        }
-        
-        .project-card {
-            background: #fafcff;
-            border-radius: 28px;
-            padding: 1.8rem;
-            transition: 0.2s;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.02), 0 0 0 1px #edf2f7;
-        }
-        
-        .project-card a {
-            display: inline-block;
-            margin-top: 1.2rem;
-            font-weight: 600;
-            color: #111827;
-            text-decoration: underline;
-            text-underline-offset: 6px;
-        }
-        
-        .hero {
-            padding: 100px 0 80px 0;
-            background: #ffffff;
-        }
-        
-        .hero h1 {
-            font-size: 3.4rem;
-            font-weight: 800;
-            letter-spacing: -0.03em;
-            line-height: 1.2;
-            max-width: 880px;
-            margin-bottom: 1.2rem;
-        }
-        
-        .hero-sub {
-            font-size: 1.2rem;
-            color: #374151;
-            max-width: 620px;
-            margin-bottom: 2rem;
-        }
-        
-        .button-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1.2rem;
-            align-items: center;
-        }
-        
-        .process-steps {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1.5rem;
-            justify-content: space-between;
-        }
-        
-        .step {
-            flex: 1;
-            background: #f9fafb;
-            border-radius: 32px;
-            padding: 1.8rem 1.2rem;
-            text-align: center;
-            font-weight: 500;
-            border: 1px solid #eef2f8;
-        }
-        
-        .step-number {
-            font-weight: 800;
-            font-size: 2rem;
-            color: #111827;
-            margin-bottom: 0.6rem;
-        }
-        
-        footer {
-            background: #fafbfc;
-            padding: 48px 0;
-            text-align: center;
-            border-top: 1px solid #eef2f5;
-        }
-        
-        .contact-cta {
-            background: #111827;
-            color: white;
-            border-radius: 48px;
-            padding: 3rem 2rem;
-            text-align: center;
-        }
-        
-        .contact-cta h3 {
-            color: white;
-            font-size: 2rem;
-        }
-        
-        .contact-cta .btn-light {
-            background: white;
-            color: #111827;
-            margin-top: 1rem;
-            display: inline-flex;
-            padding: 14px 32px;
-            border-radius: 48px;
-            font-weight: 600;
-            text-decoration: none;
-        }
-        
-        .contact-cta .btn-light:hover {
-            background: #f3f4f6;
-            transform: translateY(-2px);
-        }
-        
-        .badge-country {
-            display: inline-block;
-            background: #f3f4f6;
-            padding: 6px 14px;
-            border-radius: 40px;
-            font-size: 0.8rem;
-            font-weight: 500;
-            margin-bottom: 1.2rem;
-        }
-        
-        .preview-simbolo {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            background: linear-gradient(135deg, #111827 0%, #1f2937 100%);
-            color: white;
-            padding: 8px 20px;
-            border-radius: 60px;
-            font-size: 0.85rem;
-            font-weight: 500;
-            margin-bottom: 1rem;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-        }
-        
-        .preview-simbolo span {
-            font-size: 1.2rem;
-        }
-        
-        .preview-badge {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: #111827;
-            color: white;
-            padding: 10px 18px;
-            border-radius: 50px;
-            font-size: 0.8rem;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            z-index: 1000;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            cursor: pointer;
-            transition: transform 0.2s;
-            text-decoration: none;
-        }
-        
-        .preview-badge:hover {
-            transform: scale(1.05);
-            background: #1f2937;
-        }
-        
-        .donation-section {
-            background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
-            border-radius: 32px;
-            padding: 2rem;
-            text-align: center;
-            border: 1px solid #fed7aa;
-            margin-top: 1rem;
-        }
-        
-        .donation-section p {
-            color: #7c2d12;
-            margin-bottom: 1rem;
-        }
-        
-        .donation-note {
-            font-size: 0.8rem;
-            color: #9a3412;
-            margin-top: 0.75rem;
-        }
-        
-        @media (max-width: 768px) {
-            .container {
-                padding: 0 20px;
-            }
-            section {
-                padding: 56px 0;
-            }
-            .hero h1 {
-                font-size: 2.2rem;
-            }
-            h2 {
-                font-size: 1.8rem;
-            }
-            .button-group {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            .btn {
-                justify-content: center;
-            }
-            .process-steps {
-                flex-direction: column;
-            }
-            .contact-cta h3 {
-                font-size: 1.6rem;
-            }
-            .preview-badge {
-                bottom: 16px;
-                right: 16px;
-                padding: 8px 14px;
-                font-size: 0.7rem;
-            }
-        }
-        
-        hr {
-            margin: 1rem 0;
-            border: none;
-            height: 1px;
-            background: #eef2f8;
-        }
-        
-        .payment-note {
-            font-size: 0.85rem;
-            margin-top: 1rem;
-            opacity: 0.8;
-        }
-    </style>
+    body.dark {
+      --card-bg: #1a1f2e;
+      --card-text: #e2e8f0;
+      --card-border: #2d3748;
+      --profile-bg: #0f141f;
+      --badge-bg: #2d3748;
+      --badge-text: #8bb9dc;
+      --footer-text: #a0aec0;
+      --header-border: #2d3748;
+    }
+
+    /* === FONDO MATRIX === */
+    .matrix-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+      background: #0a0f1a;
+    }
+
+    .matrix-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background: #0a0f1a;
+      display: flex;
+      overflow: hidden;
+    }
+
+    .matrix-pattern {
+      position: relative;
+      width: 1000px;
+      height: 100%;
+      flex-shrink: 0;
+    }
+
+    .matrix-column {
+      position: absolute;
+      top: -100%;
+      width: 20px;
+      height: 100%;
+      font-size: 16px;
+      line-height: 18px;
+      font-weight: bold;
+      animation: fall linear infinite;
+      white-space: nowrap;
+    }
+
+    .matrix-column::before {
+      content: "アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲンABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: linear-gradient(
+        0deg,
+        rgba(185, 79, 255, 1) 0%,
+        rgba(255, 69, 69, 1) 20%,
+        rgba(252, 176, 69, 1) 40%,
+        rgba(252, 237, 69, 1) 60%,
+        rgba(69, 252, 90, 1) 80%,
+        rgba(69, 206, 252, 1) 100%
+      );
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      writing-mode: vertical-lr;
+      letter-spacing: 1px;
+      animation: rainbowShift 5s infinite;
+    }
+
+    .matrix-column:nth-child(odd)::before {
+      content: "アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン123456789";
+    }
+    .matrix-column:nth-child(even)::before {
+      content: "ガギグゲゴザジズゼゾダヂヅデドバビブベボパピプペポヴァィゥェォャュョッABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    }
+    .matrix-column:nth-child(3n)::before {
+      content: "アカサタナハマヤラワイキシチニヒミリウクスツヌフムユルエケセテネヘメレオコソトノホモヨロヲン0987654321";
+    }
+    .matrix-column:nth-child(4n)::before {
+      content: "ンヲロヨモホノトソコオレメヘネテセケエルユムフヌツスクウリミヒニチシキイワラヤマハナタサカア";
+    }
+    .matrix-column:nth-child(5n)::before {
+      content: "ガザダバパギジヂビピグズヅブプゲゼデベペゴゾドボポヴァィゥェォャュョッ!@#$%^&*()_+-=[]{}|;:,.<>?";
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(-10%); opacity: 1; }
+      100% { transform: translateY(200%); opacity: 0; }
+    }
+
+    @keyframes rainbowShift {
+      0% { filter: hue-rotate(0deg); }
+      100% { filter: hue-rotate(360deg); }
+    }
+
+    /* === PANTALLA DE CARGA (SPLASH) === */
+    .splash-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #0a2b3e;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      transition: opacity 0.8s ease-in-out, visibility 0.8s ease-in-out;
+    }
+
+    .splash-screen.hide {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .wrapper-grid {
+      --animation-duration: 2.1s;
+      --cube-color: #0000;
+      --highlight-color: #00cc44;
+      --cube-width: 48px;
+      --cube-height: 48px;
+      --font-size: 1.8em;
+      position: relative;
+      inset: 0;
+      display: grid;
+      grid-template-columns: repeat(7, var(--cube-width));
+      grid-template-rows: auto;
+      grid-gap: 0;
+      width: calc(7 * var(--cube-width));
+      height: var(--cube-height);
+      perspective: 350px;
+      font-family: "Poppins", sans-serif;
+      font-size: var(--font-size);
+      font-weight: 800;
+      color: transparent;
+    }
+
+    .cube { position: relative; transform-style: preserve-3d; }
+    .face {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: var(--cube-width);
+      height: var(--cube-height);
+      background-color: var(--cube-color);
+    }
+    .face-left, .face-right, .face-back, .face-front {
+      box-shadow: inset 0 0 2px 1px #0001, inset 0 0 12px 1px #fff1;
+    }
+    .face-front { transform: rotateY(0deg) translateZ(calc(var(--cube-width) / 2)); }
+    .face-back { transform: rotateY(180deg) translateZ(calc(var(--cube-width) / 2)); opacity: 0.6; }
+    .face-left { transform: rotateY(-90deg) translateZ(calc(var(--cube-width) / 2)); opacity: 0.6; }
+    .face-right { transform: rotateY(90deg) translateZ(calc(var(--cube-width) / 2)); opacity: 0.6; }
+    .face-top { height: var(--cube-width); transform: rotateX(90deg) translateZ(calc(var(--cube-width) / 2)); opacity: 0.8; }
+    .face-bottom { height: var(--cube-width); transform: rotateX(-90deg) translateZ(calc(var(--cube-height) - var(--cube-width) * 0.5)); opacity: 0.8; }
+
+    .cube:nth-child(1) { z-index: 0; animation-delay: 0s; }
+    .cube:nth-child(2) { z-index: 1; animation-delay: 0.2s; }
+    .cube:nth-child(3) { z-index: 2; animation-delay: 0.4s; }
+    .cube:nth-child(4) { z-index: 3; animation-delay: 0.6s; }
+    .cube:nth-child(5) { z-index: 2; animation-delay: 0.8s; }
+    .cube:nth-child(6) { z-index: 1; animation-delay: 1s; }
+    .cube:nth-child(7) { z-index: 0; animation-delay: 1.2s; }
+
+    .cube { animation: translate-z var(--animation-duration) ease-in-out infinite; }
+    .cube .face {
+      animation: face-color var(--animation-duration) ease-in-out infinite, edge-glow var(--animation-duration) ease-in-out infinite;
+      animation-delay: inherit;
+    }
+    .cube .face.face-front {
+      animation: face-color var(--animation-duration) ease-in-out infinite, face-glow var(--animation-duration) ease-in-out infinite, edge-glow var(--animation-duration) ease-in-out infinite;
+      animation-delay: inherit;
+    }
+
+    @keyframes translate-z {
+      0%, 40%, 100% { transform: translateZ(-2px); }
+      30% { transform: translateZ(16px) translateY(-1px); }
+    }
+    @keyframes face-color {
+      0%, 50%, 100% { background-color: var(--cube-color); }
+      10% { background-color: var(--highlight-color); }
+    }
+    @keyframes face-glow {
+      0%, 50%, 100% { color: #fff0; filter: none; }
+      30% { color: #fff; filter: drop-shadow(0 14px 10px var(--highlight-color)); }
+    }
+    @keyframes edge-glow {
+      0%, 40%, 100% { box-shadow: inset 0 0 2px 1px #0001, inset 0 0 12px 1px #fff1; }
+      30% { box-shadow: 0 0 2px 0px var(--highlight-color); }
+    }
+
+    /* === CONTENIDO PRINCIPAL (CV) === */
+    .cv-wrapper {
+      padding: 48px 24px;
+      position: relative;
+      z-index: 10;
+    }
+
+    .cv-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      background: var(--card-bg);
+      border-radius: 20px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out, background 0.3s ease;
+    }
+
+    .cv-container.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* header */
+    .header {
+      padding: 36px 48px 24px 48px;
+      border-bottom: 1px solid var(--header-border);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 24px;
+      background: var(--card-bg);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .logo-icon {
+      background: #0a2b3e;
+      width: 54px;
+      height: 54px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .logo-icon i:first-child {
+      font-size: 1.8rem;
+      color: #6bb5e0;
+    }
+
+    .logo-icon i:last-child {
+      position: absolute;
+      bottom: -6px;
+      right: -8px;
+      font-size: 0.9rem;
+      background: #e67e22;
+      border-radius: 30px;
+      padding: 4px;
+      color: white;
+    }
+
+    .logo-text h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      color: var(--card-text);
+    }
+
+    .logo-text p {
+      font-size: 0.85rem;
+      color: #5c6f87;
+    }
+
+    body.dark .logo-text p {
+      color: #a0aec0;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .contact-links {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .contact-links a, .contact-links span {
+      font-size: 0.85rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      color: #2c6280;
+    }
+
+    body.dark .contact-links a, body.dark .contact-links span {
+      color: #8bb9dc;
+    }
+
+    .contact-links a:hover {
+      color: #e67e22;
+    }
+
+    /* Botón animado de Instagram */
+    .Btn {
+      width: 45px;
+      height: 45px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      background-color: transparent;
+      position: relative;
+      border-radius: 7px;
+      cursor: pointer;
+      transition: all .3s;
+    }
+
+    .svgContainer {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: transparent;
+      backdrop-filter: blur(4px);
+      letter-spacing: 0.8px;
+      border-radius: 10px;
+      transition: all .3s;
+      border: 1px solid rgba(156, 156, 156, 0.466);
+    }
+
+    .BG {
+      position: absolute;
+      content: "";
+      width: 100%;
+      height: 100%;
+      background: #f09433;
+      background: -moz-linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+      background: -webkit-linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
+      background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
+      z-index: -1;
+      border-radius: 9px;
+      pointer-events: none;
+      transition: all .3s;
+    }
+
+    .Btn:hover .BG {
+      transform: rotate(35deg);
+      transform-origin: bottom;
+    }
+
+    .Btn:hover .svgContainer {
+      background-color: rgba(156, 156, 156, 0.466);
+    }
+
+    /* Switch de modo oscuro */
+    .theme-switch {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      width: 9em;
+      height: 2.5em;
+      font-size: 20px;
+      font-family: Montserrat;
+      font-weight: 600;
+      color: black;
+      background-color: white;
+      padding: 0.5em;
+      border: 1px solid black;
+      box-shadow: 6px 6px 0px black;
+      transition: .4s;
+      z-index: 1;
+    }
+
+    body.dark .theme-switch {
+      color: white;
+      background-color: #2d3748;
+      border-color: #4a5568;
+      box-shadow: 6px 6px 0px #4a5568;
+    }
+
+    .name::before {
+      color: black;
+      content: "Dark Mode";
+      margin-right: 2em;
+      transition: .2s ease-in-out;
+    }
+
+    body.dark .name::before {
+      color: white;
+    }
+
+    .name::after {
+      color: black;
+      content: "Light Mode";
+      margin-right: 1.7em;
+      transition: .2s ease-in-out;
+      display: none;
+    }
+
+    body.dark .name::after {
+      color: white;
+    }
+
+    .theme-switch .slider {
+      position: absolute;
+      background-color: #222;
+      margin-left: 6.2em;
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      border: 4px solid #222;
+      transform: rotate(-120deg);
+      box-shadow: inset 0px 6px #999, inset 0px 6px 1px 1px #999;
+    }
+
+    .theme-switch:hover {
+      color: white;
+      cursor: pointer;
+      box-shadow: none;
+      transform: translateX(6px) translateY(6px);
+      background-color: black;
+      border: none;
+    }
+
+    body.dark .theme-switch:hover {
+      background-color: #4a5568;
+    }
+
+    .theme-switch:hover .name::before {
+      color: white;
+    }
+
+    .theme-switch:hover .name::after {
+      color: white;
+    }
+
+    .theme-switch input[type=checkbox]:checked + .slider {
+      transform: rotate(360deg);
+      box-shadow: none;
+      border: 4px solid #F28C38;
+      background-color: #F28C38;
+    }
+
+    .theme-switch input[type=checkbox]:checked ~ .name::before {
+      display: none;
+    }
+
+    .theme-switch input[type=checkbox]:checked ~ .name::after {
+      display: block;
+    }
+
+    .theme-switch input[type=checkbox] {
+      position: absolute;
+      visibility: hidden;
+    }
+
+    .slider {
+      transition: 300ms ease;
+    }
+
+    /* cuerpo */
+    .cv-body {
+      padding: 32px 48px 48px 48px;
+      background: var(--card-bg);
+      color: var(--card-text);
+    }
+
+    .profile-card {
+      background: var(--profile-bg);
+      padding: 24px 28px;
+      border-radius: 18px;
+      margin-bottom: 40px;
+      border-left: 4px solid #2c6280;
+    }
+
+    .profile-card p {
+      color: var(--card-text);
+      font-size: 0.95rem;
+    }
+
+    .section {
+      margin-bottom: 42px;
+    }
+
+    .section-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--card-text);
+      border-bottom: 2px solid var(--card-border);
+      padding-bottom: 10px;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .section-title i {
+      color: #e67e22;
+    }
+
+    .grid-2col {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .card {
+      border: 1px solid var(--card-border);
+      border-radius: 18px;
+      padding: 20px;
+      background: var(--card-bg);
+      transition: 0.1s ease;
+    }
+
+    .card h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin: 12px 0 8px;
+      color: var(--card-text);
+    }
+
+    .card p, .card li {
+      font-size: 0.9rem;
+      color: var(--card-text);
+      opacity: 0.85;
+    }
+
+    .card ul {
+      list-style: none;
+      margin-top: 12px;
+    }
+
+    .card li {
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .card li i {
+      width: 20px;
+      color: #e67e22;
+    }
+
+    .badge-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .badge {
+      background: var(--badge-bg);
+      padding: 4px 12px;
+      border-radius: 40px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--badge-text);
+    }
+
+    .project-link {
+      display: inline-block;
+      margin-top: 14px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--badge-text);
+      text-decoration: none;
+    }
+
+    .project-link i {
+      font-size: 0.7rem;
+      transition: 0.1s;
+    }
+
+    footer {
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid var(--card-border);
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--footer-text);
+    }
+
+    @media (max-width: 750px) {
+      .header, .cv-body {
+        padding: 24px;
+      }
+      .profile-card {
+        padding: 18px;
+      }
+      .wrapper-grid {
+        --cube-width: 32px;
+        --font-size: 1.2em;
+        width: calc(7 * 32px);
+      }
+      .header {
+        flex-direction: column;
+      }
+      .header-actions {
+        justify-content: flex-start;
+      }
+    }
+  </style>
 </head>
 <body>
-
-<main>
-    <!-- HERO -->
-    <section class="hero">
-        <div class="container">
-            <div class="preview-simbolo">
-                <span>🔗</span> Vista previa activa · Comparte este enlace
-            </div>
-            <div class="badge-country">🇨🇱 Chile · JU4N Studio · 17 años</div>
-            <h1>Creo páginas web modernas y soluciones digitales para hacer crecer tu negocio</h1>
-            <div class="hero-sub">
-                Soy JU4N, desarrollador chileno. También hago contenido digital y servicios técnicos como formateo e instalación de sistemas. 
-                Te ayudo a que tu negocio tenga presencia profesional en internet.
-            </div>
-            <div class="button-group">
-                <a href="servicio.html" class="btn btn-primary">📱 Solicitar servicio</a>
-                <a href="https://www.instagram.com/ju4n_rpf.cll" target="_blank" rel="noopener noreferrer" class="btn btn-outline">📷 Escríbeme por Instagram</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- SERVICIOS -->
-    <section id="servicios">
-        <div class="container">
-            <h2 class="text-center">⚙️ Lo que puedo hacer por ti</h2>
-            <div class="grid-3">
-                <div class="card">
-                    <div class="service-icon">🌐</div>
-                    <h3>Desarrollo web</h3>
-                    <p>Creo páginas para negocios, landing pages que convierten y sitios responsive. Tu marca se ve profesional en cualquier dispositivo.</p>
-                    <ul class="benefit-list">
-                        <li>Más clientes gracias a un sitio web ordenado</li>
-                        <li>SEO básico para que te encuentren en Google</li>
-                        <li>Diseño enfocado en ventas y contactos</li>
-                    </ul>
-                </div>
-                <div class="card">
-                    <div class="service-icon">📘</div>
-                    <h3>Contenido digital</h3>
-                    <p>Escribo ebooks y contenido creativo para que compartas tu conocimiento o vendas tus ideas.</p>
-                    <ul class="benefit-list">
-                        <li>Ebooks listos para descargar o vender</li>
-                        <li>Escritura para marcas y proyectos personales</li>
-                        <li>Contenido que conecta con tu audiencia</li>
-                    </ul>
-                </div>
-                <div class="card">
-                    <div class="service-icon">🖥️</div>
-                    <h3>Servicio técnico</h3>
-                    <p>Formateo de PC, instalación de Windows/macOS y USB booteables. Dejo tu equipo como nuevo.</p>
-                    <ul class="benefit-list">
-                        <li>Computador más rápido y sin virus</li>
-                        <li>Soporte remoto o presencial (Chile)</li>
-                        <li>Precios accesibles para estudiantes y emprendedores</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- PROYECTOS -->
-    <section id="proyectos">
-        <div class="container">
-            <h2 class="text-center">✨ Algunos de mis trabajos</h2>
-            <div class="grid-2">
-                <div class="project-card">
-                    <div class="service-icon">🚀</div>
-                    <h3>Jisanicolas.online</h3>
-                    <p>Sitio web profesional, limpio y rápido. Ideal para mostrar servicios y captar clientes. Totalmente responsive.</p>
-                    <a href="https://jisanicolas.online/" target="_blank" rel="noopener noreferrer">Ver proyecto →</a>
-                </div>
-                <div class="project-card">
-                    <div class="service-icon">🤝</div>
-                    <h3>Comunidad VAS</h3>
-                    <p>Portal comunitario con diseño moderno y navegación clara. Conecta personas e información de forma sencilla.</p>
-                    <a href="http://comunidadvas.online/" target="_blank" rel="noopener noreferrer">Ver proyecto →</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- EBOOKS -->
-    <section id="ebooks">
-        <div class="container text-center">
-            <h2>📖 También escribo ebooks</h2>
-            <p style="font-size: 1.2rem; max-width: 600px; margin: 0 auto 1.8rem auto;">Historias, guías y contenido digital. Revisa mis trabajos en Wattpad.</p>
-            <a href="https://www.wattpad.com/user/Ju4n_007" target="_blank" rel="noopener noreferrer" class="btn btn-primary">📚 Ver mis ebooks</a>
-        </div>
-    </section>
-
-    <!-- POR QUÉ ELEGIRME -->
-    <section id="porque-elegirme">
-        <div class="container">
-            <h2 class="text-center">🎯 Por qué trabajar conmigo</h2>
-            <div class="grid-3">
-                <div class="card text-center">
-                    <div style="font-size: 2rem;">🧩</div>
-                    <h3>Desarrollo desde cero</h3>
-                    <p>Código limpio y hecho a tu medida, nada de plantillas genéricas.</p>
-                </div>
-                <div class="card text-center">
-                    <div style="font-size: 2rem;">✨</div>
-                    <h3>Diseño moderno</h3>
-                    <p>Me preocupo de que se vea bien y sea fácil de usar.</p>
-                </div>
-                <div class="card text-center">
-                    <div style="font-size: 2rem;">⚡</div>
-                    <h3>Entrega rápida</h3>
-                    <p>No me demoro semanas, cumplo los plazos sin atados.</p>
-                </div>
-                <div class="card text-center">
-                    <div style="font-size: 2rem;">💰</div>
-                    <h3>Precio accesible</h3>
-                    <p>Soluciones potentes a precios justos. Pago seguro vía PayPal.</p>
-                </div>
-                <div class="card text-center">
-                    <div style="font-size: 2rem;">🔧➕🌐</div>
-                    <h3>Soluciones completas</h3>
-                    <p>Web + soporte técnico en un solo lugar. No necesitas buscar más.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- PROCESO -->
-    <section id="proceso">
-        <div class="container">
-            <h2 class="text-center">📌 Cómo trabajamos</h2>
-            <div class="process-steps">
-                <div class="step"><div class="step-number">1</div> Me escribes por Instagram o el formulario</div>
-                <div class="step"><div class="step-number">2</div> Analizamos lo que necesitas</div>
-                <div class="step"><div class="step-number">3</div> Te entrego la solución lista y funcionando</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SOBRE MÍ -->
-    <section id="sobre-mi">
-        <div class="container">
-            <div class="grid-2" style="align-items: center;">
-                <div>
-                    <h2>🇨🇱 Sobre mí</h2>
-                    <p style="font-size: 1.15rem; line-height: 1.5;">Soy JU4N, desarrollador frontend y técnico chileno. Tengo 17 años y llevo un tiempo ayudando a negocios y personas a tener presencia digital seria. Creo páginas web desde cero, escribo contenido digital y arreglo problemas técnicos como formateos o instalaciones de sistemas. Me gusta hacer bien la pega y que quedes contento.</p>
-                    <div class="mt-2">
-                        <a href="https://www.instagram.com/ju4n_rpf.cll" target="_blank" class="btn btn-outline">💬 Conoce más de mi trabajo</a>
-                    </div>
-                </div>
-                <div class="text-center" style="background: #f8fafd; border-radius: 32px; padding: 2rem;">
-                    <div style="font-size: 3.5rem;">🧑‍💻</div>
-                    <p style="font-weight: 600;">JU4N Studio · creatividad + tecnología</p>
-                    <hr>
-                    <small>frontend · ebooks · soporte técnico</small>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- DONACIONES OPCIONALES -->
-    <section id="donaciones" style="padding: 40px 0;">
-        <div class="container">
-            <div class="donation-section">
-                <span style="font-size: 2.5rem;">☕✨</span>
-                <h3 style="color: #7c2d12; margin: 0.5rem 0;">¿Te gusta lo que hago?</h3>
-                <p style="font-size: 1rem;">Si mis trabajos te sirven o quieres apoyar a un desarrollador joven chileno, puedes invitarme un café virtual. <strong>Totalmente opcional</strong> 💙</p>
-                <a href="https://paypal.me/JuanBruna007" target="_blank" rel="noopener noreferrer" class="btn btn-donation">
-                    🎁 Donar vía PayPal (opcional)
-                </a>
-                <div class="donation-note">
-                    🙏 Cada aporte me ayuda a seguir aprendiendo y creando mejores soluciones. ¡Gracias de corazón!
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CONTACTO -->
-    <section id="contacto">
-        <div class="container">
-            <div class="contact-cta">
-                <h3>📲 ¿Necesitas una web, ebook o servicio técnico?</h3>
-                <p style="font-size: 1.2rem; margin: 0.8rem 0 0.5rem 0; opacity: 0.95;">Hablemos sin compromiso, te ayudo a encontrar la mejor solución.</p>
-                <a href="https://www.instagram.com/ju4n_rpf.cll" target="_blank" rel="noopener noreferrer" class="btn-light">📩 Escríbeme por Instagram</a>
-                <div class="payment-note">🌎 Trabajo con clientes de todo Chile y el mundo. Acepto pagos seguros mediante PayPal.</div>
-            </div>
-        </div>
-    </section>
-</main>
-
-<footer>
-    <div class="container">
-        <p style="font-weight: 500;">© 2025 JU4N Studio · Desarrollador frontend & soluciones digitales · Chile</p>
-        <p style="margin-top: 0.5rem; font-size: 0.85rem; color: #4b5563;">Contacto directo por Instagram: @ju4n_rpf.cll</p>
+  <!-- FONDO MATRIX -->
+  <div class="matrix-bg">
+    <div class="matrix-container">
+      <div class="matrix-pattern"><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div></div>
+      <div class="matrix-pattern"><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div></div>
+      <div class="matrix-pattern"><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div></div>
+      <div class="matrix-pattern"><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div></div>
+      <div class="matrix-pattern"><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div><div class="matrix-column"></div></div>
     </div>
-</footer>
+  </div>
 
-<!-- BOTÓN FLOTANTE CON SÍMBOLO DE VISTA PREVIA -->
-<a href="#" class="preview-badge" id="previewBtn" title="Compartir o previsualizar esta página">
-    <span>🔗</span> Vista previa · Compartir
-</a>
+  <!-- Pantalla de carga -->
+  <div class="splash-screen" id="splashScreen">
+    <div class="wrapper-grid">
+      <div class="cube"><div class="face face-front">L</div><div class="face face-back"></div><div class="face face-right"></div><div class="face face-left"></div><div class="face face-top"></div><div class="face face-bottom"></div></div>
+      <div class="cube"><div class="face face-front">O</div><div class="face face-back"></div><div class="face face-right"></div><div class="face face-left"></div><div class="face face-top"></div><div class="face face-bottom"></div></div>
+      <div class="cube"><div class="face face-front">A</div><div class="face face-back"></div><div class="face face-right"></div><div class="face face-left"></div><div class="face face-top"></div><div class="face face-bottom"></div></div>
+      <div class="cube"><div class="face face-front">D</div><div class="face face-back"></div><div class="face face-right"></div><div class="face face-left"></div><div class="face face-top"></div><div class="face face-bottom"></div></div>
+      <div class="cube"><div class="face face-front">I</div><div class="face face-back"></div><div class="face face-right"></div><div class="face face-left"></div><div class="face face-top"></div><div class="face face-bottom"></div></div>
+      <div class="cube"><div class="face face-front">N</div><div class="face face-back"></div><div class="face face-right"></div><div class="face face-left"></div><div class="face face-top"></div><div class="face face-bottom"></div></div>
+      <div class="cube"><div class="face face-front">G</div><div class="face face-back"></div><div class="face face-right"></div><div class="face face-left"></div><div class="face face-top"></div><div class="face face-bottom"></div></div>
+    </div>
+  </div>
 
-<script>
-    const previewBtn = document.getElementById('previewBtn');
-    if (previewBtn) {
-        previewBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            alert('✨ Vista previa lista ✨\n\nEsta página tiene meta tags optimizados para compartir en WhatsApp, Instagram y redes sociales.\n\n📲 Copia el enlace y compártelo: ' + window.location.href);
-            navigator.clipboard.writeText(window.location.href).catch(() => {});
-        });
+  <!-- CV principal -->
+  <div class="cv-wrapper">
+    <div class="cv-container" id="cvContainer">
+      <div class="header">
+        <div class="logo">
+          <div class="logo-icon">
+            <i class="fas fa-code"></i>
+            <i class="fas fa-wrench"></i>
+          </div>
+          <div class="logo-text">
+            <h1>Juan Bruna</h1>
+            <p>Full‑Stack · Soporte técnico · Autor</p>
+          </div>
+        </div>
+        <div class="header-actions">
+          <div class="contact-links">
+            <a href="https://www.instagram.com/ju4n_rpf.cll" target="_blank" class="Btn">
+              <span class="svgContainer">
+                <svg fill="white" class="svgIcon" viewBox="0 0 448 512" height="1.5em" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"></path>
+                </svg>
+              </span>
+              <span class="BG"></span>
+            </a>
+            <a href="https://www.wattpad.com/user/Ju4n_007" target="_blank"><i class="fas fa-book"></i> Wattpad</a>
+            <span><i class="fas fa-map-marker-alt"></i> Chile</span>
+          </div>
+          <label class="theme-switch" for="darkmodeToggle">
+            <input type="checkbox" id="darkmodeToggle">
+            <div class="slider round"></div>
+            <span class="name"></span>
+            <div class="back"></div>
+          </label>
+        </div>
+      </div>
+
+      <div class="cv-body">
+        <div class="profile-card">
+          <p><strong>Estudiante de 4to Medio · Autodidacta todoterreno</strong><br>
+          No solo escribo código, también restauro equipos y optimizo sistemas. He creado plataformas de asistencia técnica desde cero (<strong>Fix.Ju4n</strong> y <strong>ju4n.helptoyou.com</strong>) que ya ayudan a usuarios con problemas reales. Mi lema: <em>“Si está roto, lo arreglo. Si no existe, lo programo”</em>.</p>
+        </div>
+
+        <div class="section">
+          <div class="section-title"><i class="fas fa-rocket"></i> Proyectos web activos (creados 100% por mí)</div>
+          <div class="grid-2col">
+            <div class="card">
+              <i class="fas fa-headset fa-2x"></i>
+              <h3>ju4n.helptoyou.com</h3>
+              <p>Portal de asistencia técnica con guías paso a paso para Windows, macOS y Linux.</p>
+              <div class="badge-list"><span class="badge">HTML/CSS/JS</span><span class="badge">Guías prácticas</span></div>
+              <a href="https://ju4n11007.github.io/ju4n.helptoyou.com/" target="_blank" class="project-link">Ver sitio <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="card">
+              <i class="fas fa-wrench fa-2x"></i>
+              <h3>Fix.Ju4n</h3>
+              <p>Soluciones prácticas para problemas de PC: pantalla azul, PC lenta, virus, etc.</p>
+              <div class="badge-list"><span class="badge">Diseño propio</span><span class="badge">Tutoriales claros</span></div>
+              <a href="https://ju4n11007.github.io/Fix.Ju4n/" target="_blank" class="project-link">Ver sitio <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title"><i class="fas fa-microchip"></i> Servicio técnico especializado</div>
+          <div class="grid-2col">
+            <div class="card"><i class="fas fa-hdd fa-2x"></i><h3>Formateo + optimización</h3><p>Windows, macOS, Linux, Android x86.</p><div class="badge-list"><span class="badge">Windows 10/11</span><span class="badge">macOS</span><span class="badge">Linux</span></div></div>
+            <div class="card"><i class="fas fa-key fa-2x"></i><h3>Activaciones KMS</h3><p>Windows y Office (todas las versiones).</p></div>
+            <div class="card"><i class="fas fa-usb fa-2x"></i><h3>USB Booteables</h3><p>Recuperación de archivos en discos dañados.</p></div>
+            <div class="card"><i class="fas fa-chart-line fa-2x"></i><h3>Diagnóstico y reparación</h3><p>Pantalla azul, sobrecalentamiento, redes, virus.</p></div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title"><i class="fas fa-code"></i> Más proyectos & portafolio</div>
+          <div class="grid-2col">
+            <div class="card"><i class="fas fa-globe fa-2x"></i><h3>comunidadvas.online</h3><p>Portal para comunidad escolar.</p><span class="badge">Cliente real</span></div>
+            <div class="card"><i class="fas fa-child fa-2x"></i><h3>jisanicolas.online</h3><p>Sitio web para jardín infantil.</p><span class="badge">Cliente real</span></div>
+            <div class="card"><i class="fas fa-laptop-code fa-2x"></i><h3>ju4nstudio.online</h3><p>Central de servicios y portafolio.</p></div>
+            <div class="card"><i class="fas fa-book fa-2x"></i><h3>Biblioteca digital</h3><p>Sistema con login seguro.</p></div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title"><i class="fas fa-pen-fancy"></i> Autor técnico</div>
+          <div class="grid-2col">
+            <div class="card"><i class="fab fa-html5 fa-2x"></i><h3>HTML Vol 1</h3><p>★ 5 estrellas · +300 vistas en Wattpad.</p></div>
+            <div class="card"><i class="fab fa-apple fa-2x"></i><h3>Dentro de MacOS</h3><p>Manual técnico completo.</p></div>
+            <div class="card"><i class="fas fa-door-open fa-2x"></i><h3>Detrás de la puerta del jardín infantil</h3><p>Proyecto colaborativo en desarrollo.</p></div>
+          </div>
+        </div>
+
+        <footer>
+          <p>Juan Bruna · Disponible para soporte técnico, desarrollo web freelance y consultoría</p>
+          <p style="margin-top: 6px;">“Que funcione no es suficiente: tiene que correr como debe.”</p>
+        </footer>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Ocultar splash screen después de 3 segundos
+    window.addEventListener('load', function() {
+      setTimeout(function() {
+        const splash = document.getElementById('splashScreen');
+        splash.classList.add('hide');
+        const cv = document.getElementById('cvContainer');
+        cv.classList.add('visible');
+      }, 3000);
+    });
+
+    // Modo oscuro
+    const darkmodeToggle = document.getElementById('darkmodeToggle');
+    darkmodeToggle.addEventListener('change', function() {
+      if (this.checked) {
+        document.body.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+      } else {
+        document.body.classList.remove('dark');
+        localStorage.setItem('theme', 'light');
+      }
+    });
+
+    // Cargar preferencia guardada
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      document.body.classList.add('dark');
+      darkmodeToggle.checked = true;
     }
-    
-    const heroPreview = document.querySelector('.preview-simbolo');
-    if (heroPreview) {
-        heroPreview.style.cursor = 'pointer';
-        heroPreview.addEventListener('click', () => {
-            alert('🔍 Vista previa optimizada:\n\nCuando compartas este link se verá el título, descripción y un ícono.\n\nAsí tu portafolio se ve profesional en redes sociales.');
-        });
-    }
-</script>
-
+  </script>
 </body>
 </html>
