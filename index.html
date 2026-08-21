@@ -4,218 +4,244 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ju4nstudio · soluciones reales</title>
-    <!-- Fuente profesional -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* --- Reset y base --- */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body {
             font-family: 'Inter', -apple-system, sans-serif;
-            background-color: #ffffff;
-            color: #1c1c1e;
-            line-height: 1.6;
-            padding: 2rem 1.5rem;
-            max-width: 900px;
+            background: #0a0a0a;
+            color: #e8e8e8;
+            padding: 2.5rem 2rem;
+            max-width: 880px;
             margin: 0 auto;
+            line-height: 1.7;
         }
 
-        /* --- Tipografía y espaciado --- */
-        h1, h2, h3 {
-            font-weight: 600;
-            letter-spacing: -0.02em;
-        }
-
+        /* --- Tipografía --- */
         h1 {
-            font-size: 3.2rem;
+            font-weight: 700;
+            font-size: 3.5rem;
             line-height: 1.1;
+            letter-spacing: -0.02em;
+            color: #ffffff;
             margin-bottom: 0.25rem;
         }
 
+        .subtitulo {
+            font-size: 1.3rem;
+            font-weight: 300;
+            color: #b0b0b0;
+            margin-bottom: 2rem;
+        }
+
+        .subtitulo .slogan {
+            color: #6aafff;
+            font-weight: 400;
+        }
+
         h2 {
+            font-weight: 600;
             font-size: 1.8rem;
             margin-top: 3.5rem;
             margin-bottom: 1.5rem;
-            border-bottom: 2px solid #e5e5ea;
+            letter-spacing: -0.01em;
+            border-bottom: 2px solid #2a2a2a;
             padding-bottom: 0.5rem;
-            font-weight: 500;
+            color: #ffffff;
         }
 
         h3 {
-            font-size: 1.3rem;
-            margin-top: 2rem;
-            margin-bottom: 0.75rem;
-            font-weight: 500;
+            font-weight: 600;
+            font-size: 1.2rem;
+            margin-top: 1.8rem;
+            margin-bottom: 0.5rem;
+            color: #ffffff;
         }
 
         p {
-            margin-bottom: 1.25rem;
-            color: #3a3a3c;
+            color: #c8c8c8;
             max-width: 70ch;
+            margin-bottom: 1.2rem;
         }
 
+        .texto-claro {
+            background: #1a1a1a;
+            padding: 1.2rem 1.8rem;
+            border-radius: 12px;
+            border-left: 4px solid #6aafff;
+            margin: 1.5rem 0;
+            font-size: 1.05rem;
+            color: #e0e0e0;
+        }
+
+        /* --- Enlaces con efecto reparación --- */
         a {
-            color: #007AFF;
+            color: #6aafff;
             text-decoration: none;
             font-weight: 500;
             transition: all 0.2s ease;
             position: relative;
         }
 
-        /* --- EFECTO: icono de reparación en enlaces --- */
         a::after {
             content: " 🔧";
             font-size: 0.8rem;
             opacity: 0;
             transition: opacity 0.2s ease;
-            display: inline-block;
-            margin-left: 2px;
         }
 
         a:hover::after {
             opacity: 1;
         }
 
-        /* Código que aparece al hacer hover (el toque técnico) */
         a:hover {
-            background-color: #f2f2f7;
-            padding: 0.1rem 0.3rem;
-            border-radius: 4px;
-            color: #1c1c1e;
-        }
-
-        a:hover code {
-            display: inline;
-        }
-
-        a code {
-            display: none;
-            font-size: 0.7rem;
-            background: #e5e5ea;
+            background: #1a2a3a;
             padding: 0.1rem 0.4rem;
-            border-radius: 12px;
-            color: #1c1c1e;
-            font-weight: 400;
-            margin-left: 4px;
+            border-radius: 4px;
+            color: #ffffff;
         }
 
-        /* --- Estilos de la terminal --- */
+        /* --- Terminal --- */
         .terminal {
-            background: #f5f5f7;
+            background: #141414;
             padding: 1.2rem 1.8rem;
             border-radius: 12px;
             font-family: 'Courier New', monospace;
-            font-size: 1rem;
-            margin: 2rem 0;
-            border-left: 4px solid #007AFF;
-            color: #1c1c1e;
+            font-size: 0.95rem;
+            margin: 1.5rem 0;
+            border-left: 4px solid #6aafff;
+            color: #d0d0d0;
         }
 
-        .terminal span {
-            color: #007AFF;
-            font-weight: 500;
-        }
-
-        .prompt {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-        }
-
-        .prompt::before {
-            content: "$";
-            color: #8e8e93;
-            font-weight: 400;
-        }
-
-        /* --- Listas de habilidades y servicios --- */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 0.75rem 1.5rem;
-            margin: 1.5rem 0 2rem 0;
-            list-style: none;
-        }
-
-        .skills-grid li {
-            padding: 0.4rem 0;
-            border-bottom: 1px solid #f0f0f5;
-            color: #3a3a3c;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .skills-grid li::before {
-            content: "▹";
-            color: #007AFF;
+        .terminal .resaltado {
+            color: #6aafff;
             font-weight: 600;
         }
 
-        .badge {
-            font-size: 0.65rem;
-            text-transform: uppercase;
-            letter-spacing: 0.04em;
-            background: #e5e5ea;
-            padding: 0.1rem 0.6rem;
-            border-radius: 20px;
-            color: #3a3a3c;
-            font-weight: 500;
-            margin-left: auto;
+        .terminal .comando {
+            color: #888888;
         }
 
-        .badge.activo {
-            background: #007AFF;
-            color: white;
-        }
-
-        .badge.aprendiendo {
-            background: #ff9500;
-            color: white;
+        .terminal strong {
+            color: #ffffff;
         }
 
         /* --- Tarjeta de perfil --- */
-        .perfil-card {
-            background: #f8f8fa;
+        .perfil-simple {
+            background: #141414;
             border-radius: 16px;
             padding: 1.8rem 2rem;
-            margin: 1.5rem 0 2.5rem 0;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1.5rem 3rem;
-            border: 1px solid #f0f0f5;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1.2rem;
+            border: 1px solid #2a2a2a;
+            margin: 1.5rem 0;
         }
 
-        .perfil-item {
+        .perfil-simple .item {
             display: flex;
             flex-direction: column;
-            font-size: 0.9rem;
         }
 
-        .perfil-item strong {
+        .perfil-simple .item strong {
             font-weight: 600;
-            color: #1c1c1e;
+            color: #aaaaaa;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
         }
 
-        .perfil-item span {
-            color: #6c6c70;
+        .perfil-simple .item span {
+            color: #e8e8e8;
             font-weight: 400;
         }
 
-        /* --- Academia (próximamente) --- */
-        .academia-box {
-            background: #f8f8fa;
+        /* --- Lista de habilidades --- */
+        .lista-habilidades {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 0.6rem 1.5rem;
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+
+        .lista-habilidades li {
+            padding: 0.6rem 0.8rem;
+            border-bottom: 1px solid #2a2a2a;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #c8c8c8;
+        }
+
+        .lista-habilidades li .nombre {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .badge {
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 0.15rem 0.8rem;
+            border-radius: 20px;
+            font-weight: 600;
+            background: #2a2a2a;
+            color: #888888;
+        }
+
+        .badge.activo {
+            background: #6aafff;
+            color: #0a0a0a;
+        }
+
+        .badge.aprendiendo {
+            background: #ffb347;
+            color: #0a0a0a;
+        }
+
+        /* --- Explicación de Arduino --- */
+        .explicacion-arduino {
+            background: #141414;
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin: 1rem 0 1.5rem 0;
+            border: 1px solid #2a4a6a;
+        }
+
+        .explicacion-arduino .icono-grande {
+            font-size: 2.5rem;
+            margin-right: 0.5rem;
+        }
+
+        .explicacion-arduino p {
+            color: #d0d0d0;
+        }
+
+        .explicacion-arduino h3 {
+            color: #ffffff;
+        }
+
+        /* --- Academia (2027) --- */
+        .academia-card {
+            background: #141414;
             border-radius: 16px;
             padding: 1.8rem 2rem;
+            border: 1px solid #2a2a2a;
             margin: 1.5rem 0;
-            border: 1px solid #f0f0f5;
+        }
+
+        .academia-card .fecha-lanzamiento {
+            display: inline-block;
+            background: #6aafff;
+            color: #0a0a0a;
+            padding: 0.2rem 1.2rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin: 0.5rem 0;
         }
 
         .academia-tags {
@@ -226,59 +252,61 @@
         }
 
         .academia-tags span {
-            background: white;
-            padding: 0.2rem 0.8rem;
+            background: #1a1a1a;
+            padding: 0.2rem 1rem;
             border-radius: 20px;
-            font-size: 0.85rem;
-            border: 1px solid #e5e5ea;
-            color: #1c1c1e;
-        }
-
-        .academia-stats {
-            display: flex;
-            gap: 1.5rem;
-            margin-top: 1rem;
             font-size: 0.9rem;
-            color: #6c6c70;
+            border: 1px solid #2a2a2a;
+            color: #d0d0d0;
         }
 
-        .academia-stats strong {
-            color: #1c1c1e;
-            font-weight: 600;
+        .academia-card p {
+            color: #c8c8c8;
+        }
+
+        .academia-card .cita {
+            background: #1a2a3a;
+            border-radius: 8px;
+            padding: 0.8rem 1.2rem;
+            margin-top: 1rem;
+            color: #e0e0e0;
+            border-left: 3px solid #6aafff;
         }
 
         /* --- Contacto --- */
-        .contacto {
-            margin-top: 2.5rem;
-            padding-top: 1.5rem;
-            border-top: 2px solid #e5e5ea;
+        .contacto-box {
+            background: #141414;
+            border-radius: 16px;
+            padding: 1.8rem 2rem;
+            border: 1px solid #2a2a2a;
+            margin-top: 1.5rem;
         }
 
-        .contacto p {
-            margin-bottom: 0.5rem;
+        .contacto-box p {
+            color: #c8c8c8;
         }
 
-        .contacto .redes {
+        .contacto-box .redes {
             display: flex;
             gap: 1.5rem;
             flex-wrap: wrap;
-            margin-top: 0.75rem;
+            margin-top: 0.5rem;
         }
 
-        /* --- Footer y misc --- */
+        /* --- Footer --- */
         .firma {
             margin-top: 3rem;
-            font-size: 0.85rem;
-            color: #8e8e93;
-            border-top: 1px solid #f0f0f5;
             padding-top: 1.5rem;
+            border-top: 2px solid #2a2a2a;
             text-align: center;
+            color: #888888;
+            font-size: 0.85rem;
         }
 
-        hr {
-            border: none;
-            border-top: 2px solid #f0f0f5;
-            margin: 2.5rem 0;
+        .firma .slogan {
+            color: #6aafff;
+            font-weight: 500;
+            font-style: italic;
         }
 
         /* --- Responsive --- */
@@ -286,85 +314,172 @@
             body { padding: 1.5rem 1rem; }
             h1 { font-size: 2.4rem; }
             h2 { font-size: 1.5rem; }
-            .skills-grid { grid-template-columns: 1fr; }
-            .perfil-card { flex-direction: column; gap: 0.8rem; }
+            .lista-habilidades { grid-template-columns: 1fr; }
+            .perfil-simple { grid-template-columns: 1fr 1fr; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Título principal -->
+    <!-- ===== ENCABEZADO ===== -->
     <h1>Soluciones reales<br>para problemas reales.</h1>
-    <p style="font-size: 1.2rem; color: #6c6c70; margin-top: -0.2rem;">Soy <strong>Juan</strong> — soporte técnico multiplataforma & desarrollo web frontend.</p>
+    <div class="subtitulo">Soy Juan — soporte técnico y desarrollo web, desde Chile. <span class="slogan">Todo se hace desde la pasión.</span></div>
 
-    <!-- Terminal -->
+    <!-- ===== TERMINAL ===== -->
     <div class="terminal">
-        <div class="prompt">ju4n@studio:~ <span>whoami</span></div>
-        <div style="margin-top: 0.5rem;">Desarrollador web & técnico multiplataforma.<br>Apasionado por entender cómo funciona todo.</div>
+        <span class="comando">ju4n@studio:~$</span> <span class="resaltado">¿Qué hago?</span><br>
+        → Ayudo a personas y negocios con sus <strong>computadores</strong> y <strong>páginas web</strong>.<br>
+        → Desarrollo <strong>tiendas online</strong> y <strong>portafolios web</strong> para mostrar tu trabajo.
     </div>
 
-    <!-- Perfil rápido -->
-    <h2>sobre mí</h2>
-    <div class="perfil-card">
-        <div class="perfil-item"><strong>Nombre</strong><span>Juan (ju4n)</span></div>
-        <div class="perfil-item"><strong>Ubicación</strong><span>Chile</span></div>
-        <div class="perfil-item"><strong>OS soportados</strong><span>Windows · macOS · Linux</span></div>
-        <div class="perfil-item"><strong>Shell</strong><span>pasión</span></div>
-        <div class="perfil-item"><strong>Actividad</strong><span>Desarrollo web · Escritor técnico</span></div>
-        <div class="perfil-item"><strong>Este sitio</strong><span>100% código propio, sin plantillas</span></div>
+    <!-- ===== SOBRE MÍ ===== -->
+    <h2>Sobre mí</h2>
+    <div class="perfil-simple">
+        <div class="item"><strong>Nombre</strong><span>Juan (ju4n)</span></div>
+        <div class="item"><strong>Ubicación</strong><span>Chile</span></div>
+        <div class="item"><strong>Sistemas que manejo</strong><span>Windows · macOS · Linux</span></div>
+        <div class="item"><strong>Mi filosofía</strong><span>100% código propio, sin plantillas</span></div>
+        <div class="item"><strong>Libros</strong><span>He escrito libros de informática</span></div>
     </div>
 
-    <p>Llevo años metido en el mundo de la informática, y no solo en arreglar computadores: me gusta entender cómo funciona todo por dentro, del software al hardware, y siempre ando probando algo nuevo. He trabajado en Windows, macOS y Linux, y también he escrito libros técnicos porque creo que compartir lo que sabes es parte del proceso. Si no le pongo ganas a lo que hago, mejor no lo hago.</p>
+    <p>Llevo años metido en el mundo de la informática, y no solo arreglando computadores: me gusta entender <strong>cómo funciona todo por dentro</strong>, del software al hardware. He trabajado en Windows, macOS y Linux, y también he escrito libros técnicos porque creo que <strong>compartir lo que sabes es parte del proceso</strong>.</p>
 
-    <!-- Habilidades -->
-    <h2>habilidades & servicios</h2>
-    <ul class="skills-grid">
-        <li>Diagnóstico & Reparación <span class="badge activo">ACTIVO</span></li>
-        <li>Optimización de Sistemas <span class="badge activo">ACTIVO</span></li>
-        <li>Desarrollo Web Frontend <span class="badge activo">ACTIVO</span></li>
-        <li>Seguridad Informática <span class="badge activo">ACTIVO</span></li>
-        <li>Edición de Video <span class="badge aprendiendo">APRENDIENDO</span></li>
-        <li>Asesoría Educativa <span class="badge activo">ACTIVO</span></li>
+    <div class="texto-claro">
+        💡 <strong>¿Qué significa esto para ti?</strong><br>
+        Que si tienes un problema con tu computador, necesitas una <strong>tienda online</strong> o un <strong>portafolio web</strong> para mostrar tu trabajo, <strong>puedo ayudarte con un lenguaje claro y sin enredos técnicos</strong>.
+    </div>
+
+    <!-- ===== HABILIDADES Y SERVICIOS ===== -->
+    <h2>Qué hago</h2>
+    <ul class="lista-habilidades">
+        <li>
+            <span class="nombre">🔧 Diagnóstico &amp; Reparación</span>
+            <span class="badge activo">ACTIVO</span>
+        </li>
+        <li>
+            <span class="nombre">💻 Optimización remota (Windows, macOS, Linux)</span>
+            <span class="badge activo">ACTIVO</span>
+        </li>
+        <li>
+            <span class="nombre">🛒 Tiendas online</span>
+            <span class="badge activo">ACTIVO</span>
+        </li>
+        <li>
+            <span class="nombre">🎨 Portafolios web</span>
+            <span class="badge activo">ACTIVO</span>
+        </li>
+        <li>
+            <span class="nombre">🔒 Seguridad y protección de datos</span>
+            <span class="badge activo">ACTIVO</span>
+        </li>
+        <li>
+            <span class="nombre">🎬 Edición de video</span>
+            <span class="badge aprendiendo">APRENDIENDO</span>
+        </li>
+        <li>
+            <span class="nombre">📚 Escribo libros de informática</span>
+            <span class="badge activo">ACTIVO</span>
+        </li>
+        <li>
+            <span class="nombre">🔌 Arduino &amp; Electrónica</span>
+            <span class="badge aprendiendo">APRENDIENDO</span>
+        </li>
     </ul>
 
-    <!-- Academia -->
-    <h2>próximamente</h2>
-    <div class="academia-box">
-        <h3 style="margin-top: 0;">ju4nAcademy.online</h3>
-        <p style="font-weight: 500; color: #1c1c1e;">🎓 100% gratis · en construcción</p>
-        <p>Todo lo que sé sobre programación, sin costo. Una plataforma educativa completamente gratuita, desde cero hasta nivel profesional, con videos en HD, PDFs descargables, diagramas y una comunidad activa para resolver dudas.</p>
-        <div class="academia-tags">
-            <span>🐍 Python</span> <span>🌐 HTML + CSS</span> <span>⚡ JavaScript</span> <span>🗄️ SQL</span>
-            <span>⚛️ React</span> <span>🔧 Git & GitHub</span> <span>🐧 Linux</span> <span>🐳 Docker</span>
-        </div>
-        <div class="academia-stats">
-            <span><strong>0</strong> cursos publicados</span>
-            <span><strong>0</strong> videos</span>
-            <span><strong>0</strong> PDFs</span>
-            <span><strong>∞</strong> ganas de compartir</span>
+    <!-- ===== EXPLICACIÓN DE ARDUINO ===== -->
+    <div class="explicacion-arduino">
+        <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
+            <span class="icono-grande">🔌</span>
+            <div>
+                <h3 style="margin: 0; font-size: 1.1rem;">¿Qué es Arduino?</h3>
+                
+                <p style="margin: 0.3rem 0 0 0;">
+                    <strong>Arduino</strong> es un sistema que combina una <strong>placa electrónica</strong> y un 
+                    <strong>software gratuito</strong> que se instala en tu computador.
+                </p>
+                
+                <p style="margin: 0.5rem 0 0 0;">
+                    <strong>El software</strong> sirve para <strong>darle instrucciones</strong> a la placa. 
+                    Escribes órdenes sencillas (como "enciende esta luz" o "mide la temperatura") y el software 
+                    las convierte en señales que la placa entiende y ejecuta.
+                </p>
+                
+                <p style="margin: 0.5rem 0 0 0; font-size: 0.95rem;">
+                    💡 <strong>Ejemplo:</strong> Puedes programar un <strong>sensor de luz</strong> para que 
+                    <strong>encienda un LED automáticamente</strong> cuando oscurezca. 
+                    El software es el que traduce tus ideas a órdenes que la placa obedece.
+                </p>
+                
+                <p style="margin: 0.5rem 0 0 0; font-size: 0.95rem;">
+                    🧠 <strong>Lo estoy aprendiendo</strong> para poder ofrecer soluciones que mezclen el mundo digital 
+                    (páginas web) con el mundo físico (electrónica).
+                </p>
+            </div>
         </div>
     </div>
 
-    <!-- Contacto -->
-    <h2>contacto</h2>
-    <div class="contacto">
-        <p><strong>./enviar-consulta.sh</strong></p>
-        <p>Cuéntame en qué estás trabajando o qué se te rompió. Respondo dentro de 24h.</p>
-        <p>
-            <a href="mailto:juan.brunacontreras@gmail.com">juan.brunacontreras@gmail.com</a>
-            <code>✉️</code>
+    <!-- ===== ACADEMIA (LANZAMIENTO 2027) ===== -->
+    <h2>Próximamente: ju4nAcademy</h2>
+    <div class="academia-card">
+        <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
+            <span style="font-size: 2rem;">🎓</span>
+            <div>
+                <h3 style="margin: 0;">ju4nAcademy.online</h3>
+                <span class="fecha-lanzamiento">📅 Lanzamiento: 2027</span>
+            </div>
+        </div>
+        
+        <p style="margin-top: 1rem;">
+            <strong>Educación gratuita y para todos</strong>, sin importar si sabes o no de informática. 
+            Mi objetivo es que <strong>cualquier persona</strong> pueda aprender desde cero, a su propio ritmo 
+            y con explicaciones claras.
+        </p>
+
+        <div class="academia-tags">
+            <span>🐍 Python</span>
+            <span>🌐 HTML + CSS</span>
+            <span>⚡ JavaScript</span>
+            <span>🗄️ SQL</span>
+            <span>⚛️ React</span>
+            <span>🔧 Git &amp; GitHub</span>
+            <span>🐧 Linux</span>
+            <span>🐳 Docker</span>
+            <span>🔌 Arduino</span>
+        </div>
+
+        <div style="display: flex; gap: 1.5rem; flex-wrap: wrap; font-size: 0.9rem; color: #888888; margin-top: 0.5rem;">
+            <span><strong style="color: #e8e8e8;">0</strong> cursos publicados</span>
+            <span><strong style="color: #e8e8e8;">0</strong> videos</span>
+            <span><strong style="color: #e8e8e8;">0</strong> PDFs</span>
+            <span><strong style="color: #e8e8e8;">∞</strong> ganas de compartir</span>
+        </div>
+
+        <div class="cita">
+            💬 <strong>"Que todos puedan aprender, sin importar su nivel"</strong> — ese es mi compromiso.
+        </div>
+    </div>
+
+    <!-- ===== CONTACTO ===== -->
+    <h2>Contacto</h2>
+    <div class="contacto-box">
+        <p style="margin-bottom: 0.3rem;">
+            <strong>¿Tienes un problema o necesitas una web?</strong> Escríbeme y te responderé en 24 horas.
+        </p>
+        <p style="font-size: 1.1rem;">
+            <a href="mailto:juan.brunacontreras@gmail.com">✉️ juan.brunacontreras@gmail.com</a>
         </p>
         <div class="redes">
-            <a href="#">@ju4n_brun4._ <code>🐦</code></a>
-            <a href="#">Contenido técnico diario <code>📱</code></a>
-            <a href="#">🔒 ju4nTech <code>🛡️</code></a>
+            <a href="#">📱 Contenido técnico diario</a>
+            <a href="#">🔒 ju4nTech (ciberseguridad)</a>
         </div>
-        <p style="font-size: 0.9rem; color: #8e8e93; margin-top: 0.5rem;">Proyecto de ciberseguridad</p>
+        <p style="color: #888888; font-size: 0.9rem; margin-top: 0.5rem;">
+            Respuesta en 24h · Lenguaje claro para todos
+        </p>
     </div>
 
-    <!-- Pie -->
+    <!-- ===== PIE DE PÁGINA ===== -->
     <div class="firma">
-        ju4n@studio · hecho con <span style="color: #007AFF;">⌨️</span> y código propio
+        ju4n@studio · hecho con ⌨️ y <span class="slogan">todo se hace desde la pasión</span>
     </div>
 
 </body>
