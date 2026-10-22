@@ -3,388 +3,461 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CuentosOS — por Ju4n_Brun4</title>
+  <title>CuentosOS — Librería Digital de Ju4n_Brun4</title>
   
   <style>
     /* ============================================================
-       VARIABLES Y RESET
+       PALETA DE COLORES "LIBRERÍA CLÁSICA DIGITAL"
        ============================================================ */
     :root {
-      --bg: #0e0e12;
-      --bg-card: #17171f;
-      --bg-soft: #1f1f2b;
-      --text: #e8e8f0;
-      --text-muted: #a0a0b8;
-      --accent: #ff5722;
-      --accent-hover: #e64a19;
-      --border: #2a2a3a;
-      --radius: 12px;
-      --font: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-      --font-display: 'Georgia', 'Times New Roman', serif;
+      --bg-main: #0f0d0b;       /* Fondo muy oscuro, casi negro cálido */
+      --bg-card: #1a1714;       /* Fondo de las tarjetas (madera oscura) */
+      --bg-soft: #26211c;       
+      --text-main: #f4ecd8;     /* Texto color crema (papel antiguo) */
+      --text-muted: #a89f91;    
+      --accent-gold: #d4af37;   /* Amarillo/Dorado clásico para títulos */
+      --accent-gold-hover: #f1c40f;
+      --border-color: #362e26;  /* Bordes suaves */
+      --paper-bg: #f4ecd8;      /* Color papel para el lector */
+      --paper-text: #2b2622;    /* Tinta oscura para el lector */
+      --radius: 8px;
+      --font-sans: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+      --font-serif: 'Georgia', 'Times New Roman', serif;
     }
 
-    *, *::before, *::after {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      font-family: var(--font);
-      background: var(--bg);
-      color: var(--text);
+      font-family: var(--font-sans);
+      background-color: var(--bg-main);
+      background-image: radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.08), transparent 60%);
+      color: var(--text-main);
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
-      background-image: radial-gradient(ellipse at 50% 0%, rgba(255,87,34,.08), transparent 60%);
-      background-attachment: fixed;
       min-height: 100vh;
       overflow-x: hidden;
     }
 
-    a { color: var(--accent); text-decoration: none; }
+    a { color: var(--accent-gold); text-decoration: none; }
 
     /* ============================================================
-       LAYOUT PRINCIPAL
+       LAYOUT PRINCIPAL Y HEADER
        ============================================================ */
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 40px 20px 80px;
+    .container { max-width: 900px; margin: 0 auto; padding: 50px 20px 80px; }
+    
+    .header { 
+      text-align: center; 
+      margin-bottom: 60px; 
+      animation: fadeInDown 1s ease backwards; 
     }
-
-    .header {
-      text-align: center;
-      margin-bottom: 50px;
-      animation: fadeInDown 0.8s ease backwards;
-    }
-
-    .header h1 {
-      font-family: var(--font-display);
-      font-size: clamp(2.2rem, 5vw, 3.2rem);
-      font-weight: 700;
-      letter-spacing: -.02em;
+    .header h1 { 
+      font-family: var(--font-serif); 
+      font-size: clamp(2.5rem, 5vw, 3.5rem); 
+      font-weight: 700; 
+      color: var(--accent-gold);
+      letter-spacing: 0.05em;
       margin-bottom: 10px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+    }
+    .header p { 
+      color: var(--text-muted); 
+      font-size: clamp(1rem, 2vw, 1.1rem); 
+      max-width: 500px; 
+      margin: 0 auto; 
+      font-style: italic;
+    }
+    .header .credits { 
+      font-size: 0.85rem; 
+      margin-top: 15px; 
+      color: var(--accent-gold);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
     }
 
-    .header h1 span { color: var(--accent); }
-    .header p { color: var(--text-muted); font-size: clamp(0.95rem, 2vw, 1.1rem); max-width: 500px; margin: 0 auto; }
-    .header .credits { font-size: 0.85rem; margin-top: 12px; opacity: 0.7; }
-
     /* ============================================================
-       LISTA DE CUENTOS
+       LISTA DE LIBROS (ESTILO ESTANTERÍA)
        ============================================================ */
-    .book-list { display: flex; flex-direction: column; gap: 16px; }
-
+    .book-list { display: flex; flex-direction: column; gap: 20px; }
+    
     .book-item {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 16px;
-      transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 0.3s ease, border-color 0.3s ease;
-      opacity: 0;
+      display: flex; 
+      align-items: center; 
+      gap: 24px;
+      background: linear-gradient(145deg, var(--bg-card), #13110e);
+      border: 1px solid var(--border-color);
+      border-left: 4px solid var(--accent-gold); /* Detalle dorado lateral */
+      border-radius: var(--radius); 
+      padding: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+      opacity: 0; 
       transform: translateY(20px);
       animation: slideUpFade 0.6s ease forwards;
     }
 
-    /* Delays escalonados */
-    .book-item:nth-child(1) { animation-delay: 0.1s; }
-    .book-item:nth-child(2) { animation-delay: 0.15s; }
-    .book-item:nth-child(3) { animation-delay: 0.2s; }
-    .book-item:nth-child(4) { animation-delay: 0.25s; }
-    .book-item:nth-child(5) { animation-delay: 0.3s; }
-    .book-item:nth-child(6) { animation-delay: 0.35s; }
-    .book-item:nth-child(7) { animation-delay: 0.4s; }
-    .book-item:nth-child(8) { animation-delay: 0.45s; }
-    .book-item:nth-child(9) { animation-delay: 0.5s; }
-    .book-item:nth-child(10) { animation-delay: 0.55s; }
-    .book-item:nth-child(11) { animation-delay: 0.6s; }
-    .book-item:nth-child(12) { animation-delay: 0.65s; }
-    .book-item:nth-child(13) { animation-delay: 0.7s; }
-    .book-item:nth-child(14) { animation-delay: 0.75s; }
-    .book-item:nth-child(15) { animation-delay: 0.8s; }
-    .book-item:nth-child(16) { animation-delay: 0.85s; }
-    .book-item:nth-child(17) { animation-delay: 0.9s; }
+    /* Animaciones escalonadas */
+    .book-item:nth-child(1) { animation-delay: 0.1s; } 
+    .book-item:nth-child(2) { animation-delay: 0.2s; }
+    .book-item:nth-child(3) { animation-delay: 0.3s; } 
+    .book-item:nth-child(4) { animation-delay: 0.4s; }
+    .book-item:nth-child(5) { animation-delay: 0.5s; } 
+    .book-item:nth-child(6) { animation-delay: 0.6s; }
 
     @media (hover: hover) and (pointer: fine) {
-      .book-item:hover {
-        transform: translateY(-4px) scale(1.01);
-        box-shadow: 0 12px 24px rgba(0,0,0,0.4);
-        border-color: rgba(255,87,34,0.3);
+      .book-item:hover { 
+        transform: translateY(-5px) scale(1.01); 
+        box-shadow: 0 15px 35px rgba(0,0,0,0.6); 
+        border-color: rgba(212, 175, 55, 0.4); 
       }
-      .book-item:hover .book-img { transform: scale(1.05) rotate(-1deg); }
+      .book-item:hover .book-img { transform: scale(1.05); }
     }
 
     /* Portada */
-    .book-cover {
-      flex-shrink: 0;
-      width: 90px;
-      height: 130px;
-      border-radius: 6px;
-      overflow: hidden;
-      background: var(--bg-soft);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    .book-cover { 
+      flex-shrink: 0; 
+      width: 100px; 
+      height: 150px; 
+      border-radius: 4px; 
+      overflow: hidden; 
+      background: var(--bg-soft); 
+      box-shadow: -4px 4px 12px rgba(0,0,0,0.6); 
       position: relative;
+      border: 1px solid rgba(255,255,255,0.05);
     }
-
     .book-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; display: block; }
     .book-img.is-broken { display: none; }
     .book-img.is-broken + .book-fallback { display: flex; }
 
     .book-fallback {
-      display: none;
-      position: absolute;
-      inset: 0;
+      display: none; position: absolute; inset: 0;
+      align-items: center; justify-content: center; flex-direction: column;
+      background: #26211c;
+      color: var(--accent-gold); text-align: center; padding: 10px;
+      font-size: 0.7rem; font-weight: 600; text-transform: uppercase;
+      font-family: var(--font-serif);
+    }
+    .book-fallback svg { width: 30px; height: 30px; margin-bottom: 8px; stroke: var(--accent-gold); opacity: 0.8; }
+
+    /* Información */
+    .book-info { flex-grow: 1; min-width: 0; }
+    .book-title { 
+      font-family: var(--font-serif);
+      font-size: 1.3rem; 
+      font-weight: 700; 
+      color: var(--accent-gold); 
+      margin-bottom: 6px; 
+      white-space: nowrap; 
+      overflow: hidden; 
+      text-overflow: ellipsis; 
+    }
+    .book-meta { 
+      font-size: 0.85rem; 
+      color: var(--text-muted); 
+      margin-bottom: 12px; 
+      display: flex;
       align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      background: linear-gradient(160deg, #2a2a3a, #17171f);
-      color: var(--text-muted);
-      text-align: center;
-      padding: 8px;
-      font-size: 0.65rem;
+      gap: 8px;
+    }
+    .book-meta span.tag {
+      background: rgba(212, 175, 55, 0.1);
+      color: var(--accent-gold);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 0.75rem;
       font-weight: 600;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
     }
-    .book-fallback svg { width: 24px; height: 24px; margin-bottom: 6px; stroke: var(--accent); opacity: 0.6; }
 
-    .book-info { flex-grow: 1; min-width: 0; }
-    .book-title { font-size: 1.1rem; font-weight: 700; color: var(--text); margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .book-meta { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 8px; }
-
-    /* Acciones */
+    /* Botones */
     .book-actions { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
-
     .btn-read {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--accent);
-      color: #fff;
-      padding: 10px 20px;
-      border-radius: 6px;
-      font-size: 0.9rem;
+      display: inline-flex; align-items: center; justify-content: center;
+      background: transparent; 
+      color: var(--accent-gold); 
+      padding: 10px 24px;
+      border: 1px solid var(--accent-gold);
+      border-radius: 4px; 
+      font-size: 0.9rem; 
       font-weight: 600;
-      border: none;
-      cursor: pointer;
-      transition: background 0.3s ease, transform 0.2s ease;
+      cursor: pointer; 
+      transition: all 0.3s ease; 
       min-width: 140px;
     }
-    .btn-read:hover { background: var(--accent-hover); color: #fff; }
+    .btn-read:hover { 
+      background: var(--accent-gold); 
+      color: var(--bg-main); 
+      box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+    }
     .btn-read:active { transform: scale(0.97); }
 
-    .btn-more {
-      background: transparent;
-      border: 1px solid var(--border);
-      color: var(--text-muted);
-      width: 36px;
-      height: 36px;
-      border-radius: 6px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all 0.2s ease;
+    .btn-more { 
+      background: transparent; 
+      border: 1px solid var(--border-color); 
+      color: var(--text-muted); 
+      width: 40px; height: 40px; 
+      border-radius: 4px; 
+      display: flex; align-items: center; justify-content: center; 
+      cursor: pointer; transition: all 0.2s ease; 
     }
-    .btn-more:hover { background: var(--bg-soft); color: var(--text); border-color: var(--text-muted); }
+    .btn-more:hover { border-color: var(--accent-gold); color: var(--accent-gold); }
 
     /* ============================================================
-       LECTOR DE CUENTOS (MODAL)
+       MODAL LECTOR (FORMATO LIBRO FÍSICO DIGITAL)
        ============================================================ */
     .reader-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(10, 10, 14, 0.9);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      z-index: 1000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      opacity: 0;
-      visibility: hidden;
+      position: fixed; inset: 0; 
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+      z-index: 1000; display: flex; align-items: center; justify-content: center;
+      padding: 20px; opacity: 0; visibility: hidden; 
       transition: opacity 0.4s ease, visibility 0.4s ease;
     }
-
-    .reader-overlay.active {
-      opacity: 1;
-      visibility: visible;
-    }
+    .reader-overlay.active { opacity: 1; visibility: visible; }
 
     .reader-modal {
-      background: #12121a;
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      width: 100%;
-      max-width: 800px;
-      max-height: 90vh;
-      display: flex;
-      flex-direction: column;
-      box-shadow: 0 30px 60px rgba(0,0,0,0.8);
-      transform: scale(0.9) translateY(20px);
+      background: var(--paper-bg); 
+      border-radius: 4px;
+      width: 100%; max-width: 850px; max-height: 92vh;
+      display: flex; flex-direction: column; 
+      box-shadow: 
+        0 40px 100px rgba(0,0,0,0.9), 
+        inset 15px 0 30px rgba(139, 115, 85, 0.15), /* Efecto lomo de libro izquierdo */
+        inset 0 0 50px rgba(139, 115, 85, 0.05);
+      transform: scale(0.95) translateY(20px); 
       transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
-      overflow: hidden;
-      position: relative;
+      overflow: hidden; position: relative;
+      border: 1px solid #d1c7b0;
     }
+    .reader-overlay.active .reader-modal { transform: scale(1) translateY(0); }
 
-    .reader-overlay.active .reader-modal {
-      transform: scale(1) translateY(0);
+    /* Header del Lector */
+    .reader-header { 
+      display: flex; align-items: center; justify-content: space-between; 
+      padding: 20px 30px; 
+      border-bottom: 2px solid rgba(139, 115, 85, 0.2); 
+      background: #ece3d1; 
     }
-
-    /* Cabecera del lector */
-    .reader-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 16px 24px;
-      border-bottom: 1px solid var(--border);
-      background: #17171f;
-    }
-
-    .reader-header h2 {
-      font-family: var(--font-display);
-      font-size: 1.2rem;
-      font-weight: 700;
-      color: var(--text);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+    .reader-header h2 { 
+      font-family: var(--font-serif); 
+      font-size: 1.4rem; 
+      font-weight: 700; 
+      color: #4a3f35; 
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis; 
       padding-right: 20px;
     }
-
-    .reader-close {
-      background: transparent;
-      border: none;
-      color: var(--text-muted);
-      cursor: pointer;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background 0.2s ease, color 0.2s ease;
-      flex-shrink: 0;
+    
+    .reader-close { 
+      background: transparent; border: none; 
+      color: #7a6a58; cursor: pointer; 
+      width: 40px; height: 40px; border-radius: 50%; 
+      display: flex; align-items: center; justify-content: center; 
+      transition: background 0.2s ease, color 0.2s ease; flex-shrink: 0;
     }
-    .reader-close:hover { background: rgba(255,255,255,0.1); color: #fff; }
+    .reader-close:hover { background: rgba(139, 115, 85, 0.1); color: #2b2622; }
     .reader-close svg { width: 24px; height: 24px; }
 
-    /* Cuerpo del lector */
-    .reader-body {
-      padding: 30px;
-      overflow-y: auto;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 30px;
-      scrollbar-width: thin;
-      scrollbar-color: var(--border) transparent;
+    /* Cuerpo del Lector */
+    .reader-body { 
+      padding: 40px 50px; 
+      overflow-y: auto; 
+      scrollbar-width: thin; 
+      scrollbar-color: #c0b5a1 transparent; 
     }
-
     .reader-body::-webkit-scrollbar { width: 8px; }
     .reader-body::-webkit-scrollbar-track { background: transparent; }
-    .reader-body::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+    .reader-body::-webkit-scrollbar-thumb { background: #c0b5a1; border-radius: 4px; }
 
-    /* Portada en grande */
-    .reader-cover-large {
-      width: 200px;
-      height: 290px;
-      border-radius: 8px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.6);
-      object-fit: cover;
-      border: 1px solid rgba(255,255,255,0.1);
+    /* Cabecera interna del libro (Portada + Info) */
+    .reader-top { 
+      display: flex; gap: 30px; align-items: flex-start; 
+      margin-bottom: 40px; 
+      padding-bottom: 30px;
+      border-bottom: 1px dashed rgba(139, 115, 85, 0.3);
     }
+    .reader-cover-large { 
+      width: 180px; height: 260px; 
+      border-radius: 4px; 
+      box-shadow: 5px 5px 15px rgba(0,0,0,0.3); 
+      object-fit: cover; 
+      border: 1px solid #d1c7b0; 
+      flex-shrink: 0; 
+    }
+    
+    /* Info del cuento (Estilo ficha de biblioteca) */
+    .reader-info-box { 
+      flex-grow: 1; margin-top: 10px; 
+      font-family: var(--font-sans); 
+    }
+    .reader-info-row { 
+      display: flex; justify-content: space-between; 
+      font-size: 0.95rem; margin-bottom: 12px; 
+      border-bottom: 1px solid rgba(139, 115, 85, 0.1);
+      padding-bottom: 8px;
+    }
+    .reader-info-row:last-child { border-bottom: none; margin-bottom: 0; }
+    .reader-info-label { color: #7a6a58; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.8rem; }
+    .reader-info-value { color: #2b2622; font-weight: 700; }
 
-    /* Info del cuento en el lector */
-    .reader-info-box {
-      width: 100%;
-      max-width: 500px;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 20px 24px;
+    /* TEXTO DEL CUENTO (Sensación de libro físico) */
+    .reader-text {
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
+      line-height: 1.9;
+      color: var(--paper-text);
+      max-width: 650px;
+      margin: 0 auto;
+      text-align: justify;
+      hyphens: auto;
+    }
+    .reader-text p { margin-bottom: 1.8em; }
+    
+    /* Letra capital clásica */
+    .reader-text p:first-of-type::first-letter {
+      font-size: 4.5em; 
+      float: left; 
+      line-height: 0.75; 
+      padding-right: 12px; 
+      padding-top: 4px;
+      color: #8b7355; 
+      font-weight: bold;
+      font-family: var(--font-serif);
+    }
+    
+    /* Estilos de encabezados dentro del texto */
+    .reader-text h3 {
+      font-family: var(--font-sans);
+      font-size: 1.1rem;
+      color: #8b7355;
+      margin-top: 35px;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      border-bottom: 1px solid rgba(139, 115, 85, 0.2);
+      padding-bottom: 5px;
       text-align: left;
     }
 
-    .reader-info-box h3 {
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 16px;
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 10px;
+    /* Código en el texto */
+    .reader-text pre {
+      background: rgba(0,0,0,0.05); 
+      padding: 15px; 
+      border-radius: 8px; 
+      margin-bottom: 15px; 
+      overflow-x: auto; 
+      color: #4a3f35; 
+      font-family: monospace; 
+      font-size: 0.9rem; 
+      border: 1px solid #d1c7b0;
+      text-align: left;
     }
 
-    .reader-info-row {
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.9rem;
-      margin-bottom: 10px;
-    }
-    .reader-info-row:last-child { margin-bottom: 0; }
-    .reader-info-label { color: var(--text-muted); }
-    .reader-info-value { color: var(--text); font-weight: 600; }
-
-    /* ============================================================
-       RESPONSIVE
-       ============================================================ */
+    /* RESPONSIVE */
     @media (max-width: 650px) {
-      .book-item {
-        flex-direction: column;
-        align-items: flex-start;
-        position: relative;
-        padding: 16px;
-        padding-bottom: 70px;
-      }
-      .book-cover { width: 80px; height: 115px; margin-bottom: 4px; }
-      .book-title { font-size: 1rem; white-space: normal; line-height: 1.3; }
-      .book-actions { position: absolute; bottom: 16px; left: 16px; right: 16px; justify-content: space-between; }
-      .btn-read { flex-grow: 1; min-width: 0; padding: 8px 16px; font-size: 0.85rem; }
+      .book-item { flex-direction: column; align-items: flex-start; position: relative; padding: 20px; padding-bottom: 80px; }
+      .book-cover { width: 90px; height: 135px; margin-bottom: 10px; }
+      .book-title { font-size: 1.15rem; white-space: normal; line-height: 1.3; }
+      .book-actions { position: absolute; bottom: 20px; left: 20px; right: 20px; justify-content: space-between; }
+      .btn-read { flex-grow: 1; min-width: 0; padding: 10px 16px; }
 
-      .reader-body { padding: 20px; gap: 20px; }
-      .reader-cover-large { width: 150px; height: 220px; }
-      .reader-info-box { padding: 16px; }
+      .reader-body { padding: 24px 20px; }
+      .reader-top { flex-direction: column; align-items: center; text-align: center; gap: 20px; }
+      .reader-cover-large { width: 150px; height: 215px; }
+      .reader-info-box { width: 100%; text-align: left; }
+      .reader-text { font-size: 1.05rem; text-align: left; }
     }
 
-    /* ============================================================
-       ANIMACIONES
-       ============================================================ */
-    @keyframes fadeInDown {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes slideUpFade {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
-    }
+    @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes slideUpFade { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
   </style>
 </head>
 <body>
 
   <div class="container">
-    
     <header class="header">
-      <h1>CuentosOS <span>.</span></h1>
+      <h1>CuentosOS</h1>
       <p>Una colección de historias, guías y proyectos escritos por Ju4n_Brun4.</p>
       <div class="credits">Diseñado por <strong>Ju4n_Brun4</strong></div>
     </header>
 
-    <!-- LISTA DE CUENTOS -->
     <div class="book-list">
-
-      <!-- 1 -->
+      
+      <!-- 1. DE HACKER A CIBERNARCO -->
       <article class="book-item">
         <div class="book-cover">
-          <img src="quienes-fueron-los-davis.jpg" alt="Portada Quienes fueron los Davis" class="book-img" loading="lazy" onerror="this.classList.add('is-broken')">
+          <img src="de-hacker-a-cibernarcot.jpg" alt="Portada" class="book-img" loading="lazy" onerror="this.classList.add('is-broken')">
+          <div class="book-fallback">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+            <span>De hacker a cibernarco</span>
+          </div>
+        </div>
+        <div class="book-info">
+          <h2 class="book-title">De hacker a cibernarco, mi historia</h2>
+          <div class="book-meta">
+            <span class="tag">En progreso</span>
+          </div>
+        </div>
+        <div class="book-actions">
+          <button class="btn-read" 
+            data-title="De hacker a cibernarco, mi historia" 
+            data-cover="de-hacker-a-cibernarcot.jpg"
+            data-pages="15"
+            data-status="En progreso"
+            data-drafts="1">Leer cuento</button>
+          <button class="btn-more">•••</button>
+        </div>
+        <div class="book-content" style="display: none;">
+          <p><strong>SINOPSIS DEL LIBRO:</strong> Esta historia narra la curiosa, pero a la vez trágica vida de Nicolás González, el hacker chileno más buscado en Chile durante los años 2000. Él fue responsable de más de 50 ataques cibernéticos contra grandes empresas especializadas en el área informática. Años después se asoció con un cártel que apenas estaba empezando en el mundo delictual, pero ¿cómo pasó de ser hacker a narcotraficante? Descúbrelo ya.</p>
+          <p><em>Esta obra va a ser contada desde puntos de vista de cada personaje; Nicolás González, su pareja Catalina, el policía novato y el padre de Nicolás.</em></p>
+
+          <h3>Capítulo 1: "Te arrepentirás, créeme"</h3>
+          <p>-¿Las vueltas que da la vida, no? -- se dice a sí mismo Nicolás cuando se ha dado cuenta de que ya no hay vuelta atrás de las acciones que lo han llevado hasta donde está hoy mismo; prófugo de la justicia y viviendo en su pequeño auto Suzuki 4x4--.</p>
+          <p>Son las 8:00 de la mañana en Santiago de Chile, vengo recién entrando a la estación de policía, mi estación de trabajo, donde ahí mis jefes me dan tareas para cumplir. Son muy básicas como, por ejemplo, lavar los platos y ordenar la ropa tirada, pero sin duda es mucho mejor estar acá que luchando cara a cara contra delincuentes armados.</p>
+          <p>–Exclamó el recién egresado de la academia de Carabineros de Chile, Jorge Castro, de tan solo 24 años.–</p>
+        </div>
+      </article>
+
+      <!-- 2. LOS DAVIS PARTE 2 -->
+      <article class="book-item">
+        <div class="book-cover">
+          <img src="los-davis-parte-2.jpg" alt="Portada" class="book-img" loading="lazy" onerror="this.classList.add('is-broken')">
+          <div class="book-fallback">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+            <span>Los Davis Parte 2</span>
+          </div>
+        </div>
+        <div class="book-info">
+          <h2 class="book-title">Los Davis Parte 2: ¿Cómo evolucionaron?</h2>
+          <div class="book-meta">
+            <span class="tag">En progreso</span>
+          </div>
+        </div>
+        <div class="book-actions">
+          <button class="btn-read" 
+            data-title="Los Davis Parte 2: ¿Cómo evolucionaron?" 
+            data-cover="los-davis-parte-2.jpg"
+            data-pages="8"
+            data-status="En progreso"
+            data-drafts="1">Leer cuento</button>
+          <button class="btn-more">•••</button>
+        </div>
+        <div class="book-content" style="display: none;">
+          <p>¿Sabías que la delincuencia y la tecnología hoy en día van muy de la mano? Esto se debe a las grandes posibilidades que tienen los ciberdelincuentes a la hora de delinquir a través del internet.</p>
+          <p>Todo comenzó en el año 2000, semanas después de lo ocurrido en New York con la detención de la banda criminal más buscada y temida por todo EEUU. Los narcotraficantes sucesores de la banda "los Davis" fueron las personas de internet y algunos cárteles.</p>
+
+          <h3>Capítulo 1: "Ah, entiendo"</h3>
+          
+          <p><strong>CARTA DE LA POLICÍA DESPUÉS DE LA DETENCIÓN DE LOS DAVIS:</strong></p>
+          <p><em>"Como sabrán, hace unas semanas detuvimos a los delincuentes más buscados por todo el continente por realizar actividades tan horribles que no podemos comunicar de manera explícita. Debido a esto, muchas personas vía internet han mostrado sus preocupaciones por miedo a la reiteración de las acciones tomadas por estas personas. Para que esta idea no regrese, mientras que por otra parte, hay mucha gente que ha intentado replicar estas acciones ilícitas ocupando nuevas herramientas, como la tecnología, es por esto mismo que llamamos a que Ud. se informe antes de actuar de mala manera por medio de estas herramientas. Es por eso que hemos abierto una investigación sobre las diferentes mafias que se manifiestan a través de internet."</em></p>
+
+          <p style="margin-top: 30px;"><strong>CONFESIÓN DESPUÉS DE DETENCIÓN DE EX-ALIADO CON NARCOS:</strong></p>
+          <p><em>"Todo esto comenzó cuando yo tenía unos 18 años aproximadamente. En ese entonces me dedicaba a hackear sistemas informáticos de grandes empresas tales como Apple, Google, Microsoft y Amazon. En las cuales, yo me metía a los metadatos de los usuarios, donde ahí podía ver toda la información privada de cada usuario. Además de esto, filtraba información importante y confidencial, esta misma se las vendía a terceros por la Dark Web con el alias: Stup1D_P1G.404.exe."</em></p>
+        </div>
+      </article>
+
+      <!-- 3. CUENTO: QUIENES FUERON LOS DAVIS -->
+      <article class="book-item">
+        <div class="book-cover">
+          <img src="quienes-fueron-los-davis.jpg" alt="Portada" class="book-img" loading="lazy" onerror="this.classList.add('is-broken')">
           <div class="book-fallback">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
             <span>Quienes fueron los Davis</span>
@@ -392,7 +465,10 @@
         </div>
         <div class="book-info">
           <h2 class="book-title">Quienes fueron los Davis</h2>
-          <div class="book-meta">3 Borradores</div>
+          <div class="book-meta">
+            <span class="tag">En progreso</span>
+            <span>3 Borradores</span>
+          </div>
         </div>
         <div class="book-actions">
           <button class="btn-read" 
@@ -401,14 +477,73 @@
             data-pages="12"
             data-status="En progreso"
             data-drafts="3">Leer cuento</button>
-          <button class="btn-more" aria-label="Más opciones">•••</button>
+          <button class="btn-more">•••</button>
+        </div>
+        
+        <div class="book-content" style="display: none;">
+          <p><em>A principios de 1987 en New York, con sus 16 años, 3 jóvenes Jacob Davis, Bill Criss y Finn Hamilton habrían sido las personas más buscadas de los EE.UU. por la policía. ¿Cómo empezaron y cómo fue que nunca supieron quiénes fueron? ¿Quieres saber su historia?</em></p>
+          
+          <h3>Capítulo 1 "Hoy conocemos a...."</h3>
+          <p>2:43 am de 1971. Una mujer llamada Emma Davis da a luz a Jacob Davis y Tom Davis. Todo iba muy bien, demasiado bien para ser sinceros, hasta que una noche a los 6 años recién cumplidos de Jacob y su hermano, a las 4:42 am exactamente el padre de Jacob decide tomar su propia vida con un balazo en el cuello.</p>
+          <p>Esto dejó con un enorme trauma a la madre de los hermanos Davis que nunca se pudo recuperar de ese suceso, hasta que no pudo más y decidió tomar el mismo camino que su esposo tirándose de un edificio. Al ver esto Jacob a sus 7 años quedó traumado de por vida, mientras que Tom cuando pasó eso estaba durmiendo y no vio nada.</p>
+          <p>Con 10 años y sus dos padres muertos, Jacob y Tom se fueron a vivir con sus abuelos, eran una familia de clase baja. Jacob iba a un colegio municipal y le hacía bullying todo el mundo, lo golpeaban y lo insultaban por la pérdida de sus padres. Aunque tenía dos amigos, Finn Hamilton y Bill Criss. Mientras que por el lado de Tom le iba bien en la vida, de hecho era el más querido de su curso y todos los profesores lo querían.</p>
+          <p>Así pasaron los años hasta que los dos hermanos cumplieron 14 años, sus abuelos les trajeron un perro. A Tom le encantó el perro, pero por el otro lado a Jacob no le gustó en nada el perro porque venía de la calle y le faltaba una pata a causa de un choque automovilístico. Por esto mismo, John tenía un desafío para él mismo que era asesinar al perro.</p>
+
+          <h3>Capítulo 2 "El hecho ya realizado"</h3>
+          <p>• 9 de julio de 1985, 12:37 de la noche. Los abuelos de Jacob se fueron a un concierto y su hermano estaba en una fiesta con sus amigos. Jacob estaba solo en casa y su perro estaba durmiendo, entonces agarró una de las tantas armas que tenía su abuela y le disparó 10 veces al perro dejando una escena con mucha sangre y el perro mutilado. Así Jacob cumplió su psicópata objetivo.</p>
+          <p>Después fue a la habitación de su abuelo para robarle todas las armas que tenía y después se escapa de su casa siendo prófugo por el asesinato que cometió con su perro.</p>
+          <p>A las 2 am llega su hermano y sus abuelos, van a darle de comer al perro pero se encuentran al perro con balazos y mutilado en el suelo y una nota de parte de Jacob que decía: <em>"Si lees esta mierda es porque lo hice y no me arrepiento jajaja, igual ya estaba mal, solo acabé con su sufrimiento. Y sí, me fui de esta vida (no me suicidé) pero sí me fui de esta puta ciudad. Y si me quieres encontrar pregúntale a mis papás... espera, no tengo jajaja"</em>.</p>
+          <p>Después de eso la abuela llama a la policía y alertan lo que había ocurrido. El abuelo se da cuenta de que le robó todas sus armas de cacería y su dinero, y Tom solo lloraba mientras presenciaba la horrible escena.</p>
+
+          <h3>Capítulo 3 "La fuga de Jacob hacia...."</h3>
+          <p>Jacob se estuvo escondiendo en la calle y cambiando su aspecto para que no lo reconozcan. Obviamente dejó el colegio. Ya la semana de estar desaparecido sus amigos se preguntaban dónde estará Jacob, aunque nadie más le dio importancia.</p>
+          <p>Jacob se había escapado en metro tren a New Jersey y arrendó uno de los apartamentos más baratos de ahí, de solo 200 dólares cada 6 meses.</p>
+          <p>Sus abuelos iniciaron la investigación de los posibles motivos de por qué Jacob haría eso. Después de investigar durante 5 horas, encontraron que enterrado en el suelo de la habitación había 500 gramos de marihuana enterrados en el piso de la habitación de Jacob, y más animales muertos como: un conejo, dos perros y un gato partido a la mitad.</p>
+          <p>Los abuelos al ver esto dijeron: suficiente, esta mierda se acabó, llevando una investigación policial contra su psicópata nieto.</p>
+
+          <h3>Capítulo 4 "El tiempo y sus consecuencias"</h3>
+          <p>Así pasaron dos años desde ese suceso tan horrible, que con una identidad falsa Jacob entró en un liceo donde se encontró con sus amigos porque se habían mudado de ciudad. No lo delataron ni nada, al contrario, ellos eran iguales de psicópatas que su amigo Jacob y platicando un rato de aquel día los amigos concuerdan que van a tener un negocio de drogas y ser asesinos seriales.</p>
+          <p>Así, los tres amigos Finn Hamilton, Bill Criss y Jacob se apodan a sí mismos como "los Davis", ya que era el único dato que la policía tenía sobre Jacob.</p>
+          <p>Juntaron dinero robando y asaltando a gente por la calle de noche y así se compraron una casa rodante donde empezarían sus negocios de drogas vendiéndoles anónimamente a personas del liceo. Finn Hamilton era la mente maestra de la creación de las drogas, Bill Criss era el que las vendía y manipulaba a sus clientes (adictos) para que compraran más, y Jacob era el sicario del grupo.</p>
+
+          <h3>Capítulo 5 "¿Tenía que pasar?"</h3>
+          <p>18 de septiembre de 1987, 9:12 pm. Finn haciendo drogas, Jacob viendo una serie y Bill yendo a comprar químicos para hacer las drogas, cuando escuchan desde afuera de la habitación un: "Somos la policía, abran o tiraremos la puerta abajo".</p>
+          <p>Todos en la casa rodante se asustan y no saben qué hacer, esconden las drogas y las armas rápidamente y después de haber guardado todo debajo de la casa rodante. Los policías quieren entrar a revisar la casa sin permiso pero no pueden porque no tienen autorización para hacerlo. Los dos policías quieren entrar sin autorización, a lo que Bill responde: no pueden, no tienen autorización. Y el policía le contesta: a la mierda con la autorización, y apunta a Jacob con un revolver.</p>
+          <p>En la casa había mucha tensión y el policía dice: entonces nos abren o les volamos la puta cabeza. Finn los apunta con un arma y Jacob hace lo mismo. Los dos policías se asustan y piden refuerzos por el comunicador hacia la central policial, y Jacob le dispara a uno de los policías y su compañero se cubre, pero Jacob lo asesina también.</p>
+          <p>Después a las 8:00 pm llegan los refuerzos, pero la banda se había ido y los cadáveres los llevaban en la casa rodante. Los 5 policías que llegaron de refuerzos se quedaron investigando un poco el lugar para encontrar evidencia y encontraron una descripción de cómo era Jacob físicamente, lo que decía: <em>"ojos cafés, mucho acné, pelo teñido de rojo y con un cigarro en la boca"</em>.</p>
+
+          <h3>Capítulo 6 "El segundo round de Jacob"</h3>
+          <p>Después de que Jacob haya asesinado a los dos policías y abandonaran el lugar, todo el grupo se puso nervioso. Bill y Finn no paraban de decir cosas como: pero qué mierda hiciste, mataste a estos hijos de puta. A lo que Jacob respondió: cálmense, igual a quién les importaban estos imbéciles. Mi idea es que vayamos a la tienda más cercana y compremos algo para esconder a estos malnacidos hijos de puta, ¿les parece? Todo el grupo dijo que sí.</p>
+          <p>Después de estar 2 horas andando sin rumbo alguno, encontraron uno y justo antes de bajar de la casa para comprar las cosas, se escucha por el comunicador de los policías muertos: aquí 978 me copian. Y Bill y Jacob contestaron: aquí copiado, ya atrapamos a estos tarados, ¿dónde los dejamos? Y el policía responde: en la comisaría 2008, cambio y fuera.</p>
+          <p>Después de eso se bajaron y compraron las cosas necesarias como: una pala, un desinfectante, carbón y madera. Pagaron y todo salió bien. Y Finn dice: ¡oigan! ¿Qué pasa? responde el grupo. Tengo una idea, la cual es: secuestrar a esos tres jóvenes que se parecen a nosotros y entregarlos, y nosotros nos ponemos los trajes de policías y nos hacemos pasar por ellos, ¿les parece? Todo el grupo responde que sí y pusieron manos a la obra.</p>
+
+          <h3>Capítulo 7 "El procedimiento"</h3>
+          <p>• Habían 3 jóvenes sentados cerca del Blockbuster, entonces los tres del grupo agarraron bolsas y arrastraron a los tres jóvenes hasta la casa rodante y con las esposas de los policías los amarraron de las manos a unas sillas. Les pasaron la ropa y se cambiaron obligados porque Jacob los estaba apuntando con un arma amenazándolos. Los tres jóvenes lo hicieron y se pusieron la ropa de los tres psicópatas, a los cuales los jóvenes les preguntaban: ¿por qué hacen esto?, ¿cómo se llaman? A lo que Bill enojado responde: nosotros nos llamamos los Davis, ¿me oíste? A lo que uno de los rehenes contestó muy asustado y tartamudeando: s... sss..... Sí.. sí señor, entendí.</p>
+          <p>Los protagonistas llegan a la dirección que les mandaron los policías, pero unas horas antes habían enterrado los cuerpos de los policías y la droga y las armas, ya que así ahora sí podrían revisarles la casa. Llegan al centro policial y nadie sospecha nada y todo pasa normal. Los rehenes no dicen nada porque los drogaron antes de llegar y así se van como si nada.</p>
+
+          <h3>Capítulo 8 "La huida"</h3>
+          <p>24 horas después de toda esa aventura se fueron a Chicago, donde ahí el grupo se compró un departamento y vendería la casa rodante para operarse fijamente en el negocio de drogas a menores.</p>
+          <p>Un día Bill ve los pedidos pero uno le llama particularmente la atención, que decía: <em>"De parte de Miguel Davis, quiero un kilo de cannabis y que sea rápido, esta es mi dirección (censurado)"</em>. Y Bill se da cuenta que la dirección que mandó era exactamente igual a donde vivía Jacob antes de la muerte de sus dos padres. Lo recuerda porque con Jacob y Finn se conocen hace años en primaria e iba todos los viernes a jugar a la pelota. Acepta el pedido pero no le dice nada a Jacob. Le envía la droga y todo bien, más una carta que decía: ven a esta dirección (_¿?¿?_), ahí te paso el producto.</p>
+
+          <h3>Capítulo 9 "El Reencuentro"</h3>
+          <p>• Bill le explica a Finn por qué y dónde van a ese lugar y por qué no hay que decirle a Jacob. Llegan al lugar donde concordaron con Jacob durmiendo en el auto que se robaron para poder ir. Bill ve llegar al hombre y le dice: ¿te acuerdas de tu hijo? Y el señor le dice: ¿Qué? ¿Cuál hijo? Y Bill dice: por favor no te hagas el estúpido... ¿por qué fingiste hacer eso y hacer que toda tu familia lo pasara como la mierda? ¿Eh? Dime. Y del enojo le clava un cuchillo, lo cual lo hace tener una hemorragia.</p>
+          <p>Todo ese ruido despierta a Jacob, que se despierta rápidamente y dice: qué mierda está pasando aquí. ¡Nada! Responde Finn tratando de que no vea. Pero Jacob empuja a Finn para poder salir del auto y ve a su supuesto padre muerto desangrándose en el suelo ya con Bill con el cuchillo en las manos. Jacob le mete un balazo en la pierna y dice por qué lo hiciste, ¡maldito hijo de puta! Bill quiere golpearlo pero lo apunta y Jacob le dice: ¿tú también? Y le pregunta a su padre cómo sigue. Y antes que su padre diga algo, llega la policía.</p>
+
+          <h3>Capítulo 10 "La explicación"</h3>
+          <p>1 semana después Jacob es arrestado en un juicio y su padre, Finn y Bill fueron al hospital. Ahí en la cárcel le pide a su padre toda la explicación y el padre dice: escucha mocoso problemático, mira, yo fingí mi muerte porque pensé que me iba a morir porque hace unos meses me desarrollaron cáncer pulmonar y quise hacerlo más fácil. Pero, ¿cómo nos encontramos? Pregunta Jacob, y el padre responde: el policía que contactaron era yo.</p>
+          <p>1 año después. Jacob está pensando en su celda y llega un guardia que le dice: ven hijo de puta, y lo ponen en una silla eléctrica, siendo grabado en televisión nacional siendo el primer menor de edad ejecutado en la silla eléctrica. Y su padre dice: últimas palabras. Y Jacob responde: <em>"Vivan los Davis por siempre"</em>. Y así Jacob muere y el resto del grupo queda en libertad condicional.</p>
+
+          <h3>Capítulo 11 "¿Y el final?"</h3>
+          <p>1 semana después, Bill y Finn tienen que declarar en un interrogatorio por parte de la policía, pero fácilmente logran engañarlos y quedan libres por el momento porque la policía no puede confirmar ni desconfirmar nada de lo que dijeron en su declaración cada uno.</p>
+          <p>1 mes después de la partida de Jacob le hacen un funeral y Bill deja en su tumba una carta que dice: <em>"Hola, Jacob, soy yo, Bill. Quizás puedas leer esto, no sé, pero te quería decir que más que un extraño que llegó a mi vida, eras como un hermano para mí a pesar de todas las diferencias que tuvimos. Por eso hoy y para siempre te digo adiós querido Jacob"</em>.</p>
+          <p>Bill y Finn deciden tomar caminos diferentes por la vida, Bill con una esposa y 2 hijos, y Finn intentando encontrar trabajo para mejorar su vida y olvidar el pasado. Pero un llamado que recibe Finn los vuelve a unir para seguir con sus locas aventuras por Estados Unidos conociendo a gente en el trayecto, mientras que la policía lleva una investigación sobre cómo funcionaba el cerebro de Jacob para estudiarlo y analizarlo lo más posible.</p>
         </div>
       </article>
 
-      <!-- 2 -->
+      <!-- 4. MARTIN, MI HISTORIA CON EL ROCK -->
       <article class="book-item">
         <div class="book-cover">
-          <img src="martin-mi-historia-con-el-rock.jpg" alt="Portada Martin, mi historia con el rock" class="book-img" loading="lazy" onerror="this.classList.add('is-broken')">
+          <img src="martin-mi-historia-con-el-rock.jpg" alt="Portada" class="book-img" loading="lazy" onerror="this.classList.add('is-broken')">
           <div class="book-fallback">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
             <span>Martin, mi historia con el rock</span>
@@ -416,7 +551,10 @@
         </div>
         <div class="book-info">
           <h2 class="book-title">Martin, mi historia con el rock</h2>
-          <div class="book-meta">1 Borrador</div>
+          <div class="book-meta">
+            <span class="tag">En progreso</span>
+            <span>1 Borrador</span>
+          </div>
         </div>
         <div class="book-actions">
           <button class="btn-read" 
@@ -425,14 +563,22 @@
             data-pages="8"
             data-status="En progreso"
             data-drafts="1">Leer cuento</button>
-          <button class="btn-more" aria-label="Más opciones">•••</button>
+          <button class="btn-more">•••</button>
+        </div>
+        <div class="book-content" style="display: none;">
+          <p>A ver, ¿cómo empiezo con esta historia? Mejor del principio, terminando por el final.</p>
+          <p>Yo soy Martin, un adolescente de 15 años en busca de mi más grande sueño.</p>
+          <p>Soy de clase media baja y vivo en Puente Alto. Desde siempre fui un niño normal, lleno de aficiones y sueños, pero entre todo eso estaba mi más grande sueño: ser un rockero mundialmente famoso, tal como Elvis Presley, Axl Rose o Kurt Cobain. En fin, mi gusto por la música y el rock en general se inició cuando mi querida madre me mostró la canción "Paramar" del grupo chileno "Los Prisioneros", y desde que los escuché, mi amor al rock y a la música en general fue a primera vista.</p>
+          <p>Tengo una madre y un padre, quienes están separados, por lo cual vivo con mi mamá y no veo mucho a mi papá, pero para mí no es un impedimento para lograr mi sueño: ser un rockero de fama mundial.</p>
+          <p>Yo tenía 8 años cuando me regalaron mi primera guitarra, desde ahí que me aprendo canciones de memoria. Mis favoritas son: "Tren al sur", "De música ligera" y "Bohemian Rhapsody".</p>
+          <p><strong>Ese es Martin y mi historia con el rock.</strong></p>
         </div>
       </article>
 
-      <!-- 3 -->
+      <!-- 5. PYTHON DESDE CERO (GUÍA COMPLETA) -->
       <article class="book-item">
         <div class="book-cover">
-          <img src="python-desde-cero.jpg" alt="Portada PYTHON desde cero" class="book-img" loading="lazy" onerror="this.classList.add('is-broken')">
+          <img src="python-desde-cero.jpg" alt="Portada" class="book-img" loading="lazy" onerror="this.classList.add('is-broken')">
           <div class="book-fallback">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
             <span>PYTHON desde cero</span>
@@ -440,7 +586,10 @@
         </div>
         <div class="book-info">
           <h2 class="book-title">PYTHON desde cero</h2>
-          <div class="book-meta">5 Partes Publicadas</div>
+          <div class="book-meta">
+            <span class="tag">Publicado</span>
+            <span>5 Partes</span>
+          </div>
         </div>
         <div class="book-actions">
           <button class="btn-read" 
@@ -449,343 +598,167 @@
             data-pages="45"
             data-status="Publicado (5 partes)"
             data-drafts="0">Leer cuento</button>
-          <button class="btn-more" aria-label="Más opciones">•••</button>
+          <button class="btn-more">•••</button>
         </div>
-      </article>
+        <div class="book-content" style="display: none;">
+          <h3>Python y sus inicios</h3>
+          <p>Python es un lenguaje de programación de alto nivel creado por Guido van Rossum y lanzado por primera vez en 1991. Aquí tienes una breve historia de Python:</p>
+          <p><strong>1. Orígenes:</strong> Guido van Rossum comenzó a trabajar en Python a finales de los 80 mientras trabajaba en el Centro de Matemáticas y Informática (CWI) en los Países Bajos. Estaba buscando un proyecto de pasatiempo para trabajar durante su Navidad, y la idea de un nuevo lenguaje de programación surgió como una forma de mejorar el lenguaje ABC.</p>
+          <p><strong>2. Versión 0.9:</strong> La primera versión pública de Python, 0.9.0, fue lanzada en febrero de 1991. Esta versión incluía características fundamentales como módulos, funciones y tipos de datos básicos.</p>
+          <p><strong>3. Versión 1.0:</strong> Python 1.0 se lanzó en enero de 1994, con soporte para clases, excepciones y funciones lambda, entre otras características.</p>
+          <p><strong>4. Comunidad creciente:</strong> A medida que Python ganaba popularidad, su comunidad de usuarios y contribuyentes también creció. Esto condujo al desarrollo de bibliotecas estándar y a un ecosistema de terceros próspero.</p>
+          <p><strong>5. Python 2.x vs. Python 3.x:</strong> En 2008, se lanzó Python 3.0, que introdujo cambios significativos en el lenguaje para abordar deficiencias y mejorar la consistencia. Sin embargo, estos cambios no eran retrocompatibles con Python 2.x, lo que llevó a un período de transición. Python 2.7, lanzado en 2010, fue el último lanzamiento de la serie 2.x, y se acordó que su soporte terminaría en 2020.</p>
+          <p><strong>6. Adopción generalizada:</strong> Python se convirtió en uno de los lenguajes de programación más populares del mundo. Se utiliza en una amplia gama de campos, desde desarrollo web hasta inteligencia artificial y análisis de datos.</p>
+          <p><strong>7. Python en la actualidad:</strong> Python sigue evolucionando con lanzamientos regulares. La comunidad de Python es conocida por su amabilidad y su énfasis en el código limpio y legible. Python es utilizado por empresas y organizaciones de renombre, y su crecimiento continúa en áreas como la ciencia de datos, la inteligencia artificial, el desarrollo web y más.</p>
+          <p>En resumen, Python ha recorrido un largo camino desde sus humildes comienzos en los años 90 hasta convertirse en uno de los lenguajes de programación más populares y versátiles en la actualidad.</p>
 
-      <!-- 4 -->
-      <article class="book-item">
-        <div class="book-cover">
-          <img src="rock-latinoamericano.jpg" alt="Portada ROCK LATINOAMERICANO" class="book-img" loading="lazy" onerror="this.classList.add('is-broken')">
-          <div class="book-fallback">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-            <span>ROCK LATINOAMERICANO</span>
-          </div>
-        </div>
-        <div class="book-info">
-          <h2 class="book-title">ROCK LATINOAMERICANO</h2>
-          <div class="book-meta">1 Borrador</div>
-        </div>
-        <div class="book-actions">
-          <button class="btn-read" 
-            data-title="ROCK LATINOAMERICANO" 
-            data-cover="rock-latinoamericano.jpg"
-            data-pages="15"
-            data-status="En progreso"
-            data-drafts="1">Leer cuento</button>
-          <button class="btn-more" aria-label="Más opciones">•••</button>
-        </div>
-      </article>
+          <h3>Filosofía de Python (El Zen de Python)</h3>
+          <p>La filosofía de diseño de Python está encapsulada en lo que se conoce como "The Zen of Python" (El Zen de Python), que es una serie de principios que guían el diseño y desarrollo del lenguaje. Estos principios fueron escritos por Tim Peters y se pueden ver dentro del intérprete de Python al ejecutar 'import this'. Aquí están los principios principales:</p>
+          <p><strong>1. Hermoso es mejor que feo:</strong> Python se esfuerza por tener un código limpio, legible y estéticamente agradable.</p>
+          <p><strong>2. Explícito es mejor que implícito:</strong> El código debe ser claro y fácil de entender. Los comportamientos sorpresivos o implícitos deben evitarse en la medida de lo posible.</p>
+          <p><strong>3. Simple es mejor que complejo:</strong> Python favorece la simplicidad en el diseño y la implementación. Los problemas deben abordarse de la manera más directa y simple posible.</p>
+          <p><strong>4. Complejo es mejor que complicado:</strong> Aunque la simplicidad es importante, no debe comprometerse la funcionalidad. Si una solución es naturalmente compleja, entonces es aceptable ser compleja, pero no debe ser complicada ni confusa.</p>
+          <p><strong>5. Plano es mejor que anidado:</strong> Python favorece las estructuras de código planas y no demasiado anidadas. Se prefiere evitar la anidación excesiva que puede hacer que el código sea difícil de seguir.</p>
+          <p><strong>6. Espaciado cuenta:</strong> Python utiliza la indentación para delimitar bloques de código en lugar de llaves o palabras clave como en otros lenguajes. Esto fomenta un código más limpio y fácil de leer.</p>
+          <p><strong>7. Los casos especiales no son lo suficientemente especiales como para romper las reglas:</strong> Python trata de mantener la coherencia y consistencia en su diseño. Las excepciones deben ser raras y justificadas.</p>
+          <p><strong>8. Aunque la practicidad le gana a la pureza:</strong> Python valora la practicidad y la utilidad sobre la pureza teórica. Es mejor tener una solución práctica y funcional que seguir reglas estrictas de diseño.</p>
+          <p><strong>9. Los errores nunca deben pasar silenciosamente:</strong> Python alienta a que los errores sean detectados y manejados explícitamente en lugar de ser ignorados o suprimidos.</p>
+          <p><strong>10. En la cara de la ambigüedad, rechazar la tentación de adivinar:</strong> Python prefiere ser explícito en lugar de ambiguo. La claridad es preferible a la concisión en estos casos.</p>
+          <p><strong>11. Debería haber una, y preferiblemente solo una, manera obvia de hacerlo:</strong> Python promueve la simplicidad y la claridad al reducir la ambigüedad y las opciones innecesarias.</p>
+          <p><strong>12. Ahora es mejor que nunca:</strong> Python valora la entrega oportuna y la iteración continua sobre la búsqueda interminable de la perfección.</p>
+          <p>Estos principios reflejan la filosofía de diseño de Python, que ha contribuido a su éxito y popularidad como lenguaje de programación.</p>
 
-      <!-- 5 -->
-      <article class="book-item">
-        <div class="book-cover">
-          <img src="linux-desmitificado.jpg" alt="Portada Linux Desmitificado" class="book-img" loading="lazy" onerror="this.classList.add('is-broken')">
-          <div class="book-fallback">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-            <span>Linux Desmitificado</span>
-          </div>
-        </div>
-        <div class="book-info">
-          <h2 class="book-title">Linux Desmitificado: Distribuciones y Más</h2>
-          <div class="book-meta">2 Partes Publicadas</div>
-        </div>
-        <div class="book-actions">
-          <button class="btn-read" 
-            data-title="Linux Desmitificado: Distribuciones y Más" 
-            data-cover="linux-desmitificado.jpg"
-            data-pages="22"
-            data-status="Publicado (2 partes)"
-            data-drafts="0">Leer cuento</button>
-          <button class="btn-more" aria-label="Más opciones">•••</button>
-        </div>
-      </article>
+          <h3>Ventajas y características</h3>
+          <p>Python es un lenguaje de programación que ofrece una serie de ventajas y características que lo hacen popular y ampliamente utilizado en una variedad de campos. Aquí tienes algunas de sus principales ventajas y características:</p>
+          <p><strong>1. Sintaxis clara y legible:</strong> Python se destaca por su sintaxis limpia y legible, lo que facilita la escritura y comprensión del código. Utiliza una sintaxis basada en la indentación, lo que fomenta la escritura de código limpio y bien estructurado.</p>
+          <p><strong>2. Facilidad de aprendizaje:</strong> Python es conocido por ser uno de los lenguajes de programación más fáciles de aprender, especialmente para principiantes. Su sintaxis simple y su enfoque en la legibilidad hacen que sea accesible incluso para aquellos que no tienen experiencia previa en programación.</p>
+          <p><strong>3. Amplia biblioteca estándar:</strong> Python cuenta con una biblioteca estándar muy completa que ofrece una amplia gama de módulos y funciones para realizar diversas tareas, desde operaciones básicas hasta operaciones avanzadas como el procesamiento de texto, la manipulación de archivos, la creación de interfaces gráficas de usuario, la conexión a bases de datos, entre otras.</p>
+          <p><strong>4. Portabilidad:</strong> Python es un lenguaje multiplataforma, lo que significa que el mismo código puede ejecutarse en diferentes sistemas operativos sin necesidad de realizar cambios significativos. Esto facilita el desarrollo de aplicaciones que se pueden ejecutar en una variedad de plataformas, incluyendo Windows, macOS y Linux.</p>
+          <p><strong>5. Extensibilidad:</strong> Python es altamente extensible y admite la integración con otros lenguajes de programación como C y C++, lo que permite optimizar el rendimiento de ciertas partes críticas del código cuando sea necesario.</p>
+          <p><strong>6. Soporte para programación orientada a objetos:</strong> Python es un lenguaje de programación orientada a objetos, lo que significa que permite la definición de clases y objetos, lo que facilita la creación de código modular y reutilizable.</p>
+          <p><strong>7. Comunidad activa:</strong> Python cuenta con una gran y activa comunidad de desarrolladores que contribuyen constantemente con bibliotecas, marcos de trabajo y herramientas que amplían la funcionalidad del lenguaje y lo mantienen actualizado con las últimas tendencias y tecnologías.</p>
+          <p><strong>8. Versatilidad:</strong> Python es un lenguaje versátil que se utiliza en una amplia variedad de campos, incluyendo desarrollo web, análisis de datos, inteligencia artificial, aprendizaje automático, desarrollo de juegos, automatización de tareas, entre otros.</p>
 
-      <!-- 6 -->
-      <article class="book-item">
-        <div class="book-cover">
-          <img src="diego-y-su-depresion.jpg" alt="Portada Diego y su depresión" class="book-img" loading="lazy" onerror="this.classList.add('is-broken')">
-          <div class="book-fallback">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-            <span>Diego y su depresión</span>
-          </div>
-        </div>
-        <div class="book-info">
-          <h2 class="book-title">Diego y su depresión</h2>
-          <div class="book-meta">1 Borrador</div>
-        </div>
-        <div class="book-actions">
-          <button class="btn-read" 
-            data-title="Diego y su depresión" 
-            data-cover="diego-y-su-depresion.jpg"
-            data-pages="6"
-            data-status="En progreso"
-            data-drafts="1">Leer cuento</button>
-          <button class="btn-more" aria-label="Más opciones">•••</button>
-        </div>
-      </article>
+          <h3>Fundamentos de Programación en Python</h3>
+          <p>Los fundamentos de programación en Python incluyen conceptos básicos que son esenciales para comprender y utilizar el lenguaje de manera efectiva. Aquí hay una lista de algunos de los fundamentos de programación en Python:</p>
+          <p><strong>Variables y tipos de datos:</strong> En Python, puedes asignar valores a variables y estos valores pueden ser de diferentes tipos de datos, como enteros, flotantes, cadenas, listas, tuplas y diccionarios.</p>
+          <pre><code># Ejemplo de variables y tipos de datos
+numero = 10
+decimal = 3.14
+texto = "Hola, mundo!"
+lista = [1, 2, 3, 4, 5]</code></pre>
+          
+          <p><strong>Operadores:</strong> Python admite varios tipos de operadores, como operadores aritméticos (+, -, *, /), operadores de comparación (==, !=, <, >), operadores lógicos (and, or, not), entre otros.</p>
+          <pre><code># Ejemplo de operadores
+a = 10
+b = 5
+suma = a + b
+es_mayor = a > b</code></pre>
 
-      <!-- 7 -->
-      <article class="book-item">
-        <div class="book-cover">
-          <img src="aprendiendo-react.jpg" alt="Portada Aprendiendo React" class="book-img" loading="lazy" onerror="this.classList.add('is-broken')">
-          <div class="book-fallback">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-            <span>Aprendiendo React</span>
-          </div>
-        </div>
-        <div class="book-info">
-          <h2 class="book-title">Aprendiendo React: De Principiante a Experto</h2>
-          <div class="book-meta">11 Borradores</div>
-        </div>
-        <div class="book-actions">
-          <button class="btn-read" 
-            data-title="Aprendiendo React: De Principiante a Experto" 
-            data-cover="aprendiendo-react.jpg"
-            data-pages="68"
-            data-status="En progreso"
-            data-drafts="11">Leer cuento</button>
-          <button class="btn-more" aria-label="Más opciones">•••</button>
-        </div>
-      </article>
+          <p><strong>Estructuras de control:</strong> Python ofrece estructuras de control como condicionales (if, elif, else) y bucles (for, while) para controlar el flujo de ejecución del programa.</p>
+          <pre><code># Ejemplo de estructuras de control
+if edad >= 18:
+    print("Eres mayor de edad")
+else:
+    print("Eres menor de edad")
 
-      <!-- 8 -->
-      <article class="book-item">
-        <div class="book-cover">
-          <img src="crear-animaciones-js-css.jpg" alt="Portada Crear Animaciones con JS y CSS" class="book-img" loading="lazy" onerror="this.classList.add('is-broken')">
-          <div class="book-fallback">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-            <span>Animaciones JS y CSS</span>
-          </div>
-        </div>
-        <div class="book-info">
-          <h2 class="book-title">CREAR ANIMACIONES CON JS Y CSS</h2>
-          <div class="book-meta">1 Borrador</div>
-        </div>
-        <div class="book-actions">
-          <button class="btn-read" 
-            data-title="CREAR ANIMACIONES CON JS Y CSS" 
-            data-cover="crear-animaciones-js-css.jpg"
-            data-pages="9"
-            data-status="En progreso"
-            data-drafts="1">Leer cuento</button>
-          <button class="btn-more" aria-label="Más opciones">•••</button>
-        </div>
-      </article>
+for i in range(5):
+    print(i)
 
-      <!-- 9 -->
-      <article class="book-item">
-        <div class="book-cover">
-          <img src="typescript-guia.jpg" alt="Portada TypeScript" class="book-img" loading="lazy" onerror="this.classList.add('is-broken')">
-          <div class="book-fallback">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-            <span>TypeScript</span>
-          </div>
-        </div>
-        <div class="book-info">
-          <h2 class="book-title">TypeScript: Una Guía Completa para Desarrolladores</h2>
-          <div class="book-meta">3 Borradores</div>
-        </div>
-        <div class="book-actions">
-          <button class="btn-read" 
-            data-title="TypeScript: Una Guía Completa para Desarrolladores" 
-            data-cover="typescript-guia.jpg"
-            data-pages="34"
-            data-status="En progreso"
-            data-drafts="3">Leer cuento</button>
-          <button class="btn-more" aria-label="Más opciones">•••</button>
-        </div>
-      </article>
+while x < 10:
+    print(x)
+    x += 1</code></pre>
 
-      <!-- 10 -->
-      <article class="book-item">
-        <div class="book-cover">
-          <img src="hackers-piratas-informaticos.jpg" alt="Portada HACKERS" class="book-img" loading="lazy" onerror="this.classList.add('is-broken')">
-          <div class="book-fallback">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-            <span>HACKERS</span>
-          </div>
-        </div>
-        <div class="book-info">
-          <h2 class="book-title">HACKERS, cuídate de los piratas informáticos</h2>
-          <div class="book-meta">1 Borrador</div>
-        </div>
-        <div class="book-actions">
-          <button class="btn-read" 
-            data-title="HACKERS, cuídate de los piratas informáticos" 
-            data-cover="hackers-piratas-informaticos.jpg"
-            data-pages="18"
-            data-status="En progreso"
-            data-drafts="1">Leer cuento</button>
-          <button class="btn-more" aria-label="Más opciones">•••</button>
-        </div>
-      </article>
+          <p><strong>Funciones:</strong> Puedes definir funciones en Python para encapsular bloques de código que realizan tareas específicas. Las funciones pueden tener parámetros y devolver valores.</p>
+          <pre><code># Ejemplo de funciones
+def suma(a, b):
+    return a + b
 
-      <!-- 11 -->
-      <article class="book-item">
-        <div class="book-cover">
-          <img src="el-otro-x100to-de-chile.jpg" alt="Portada El otro x100to de Chile" class="book-img" loading="lazy" onerror="this.classList.add('is-broken')">
-          <div class="book-fallback">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-            <span>El otro x100to de Chile</span>
-          </div>
-        </div>
-        <div class="book-info">
-          <h2 class="book-title">El otro x100to de Chile</h2>
-          <div class="book-meta">2 Borradores</div>
-        </div>
-        <div class="book-actions">
-          <button class="btn-read" 
-            data-title="El otro x100to de Chile" 
-            data-cover="el-otro-x100to-de-chile.jpg"
-            data-pages="25"
-            data-status="En progreso"
-            data-drafts="2">Leer cuento</button>
-          <button class="btn-more" aria-label="Más opciones">•••</button>
-        </div>
-      </article>
+resultado = suma(3, 5)
+print(resultado)</code></pre>
 
-      <!-- 12 -->
-      <article class="book-item">
-        <div class="book-cover">
-          <img src="quienes-fueron-los-davis-fin-hamilton.jpg" alt="Portada Quiénes fueron los Davis (fin.n Hamilton)" class="book-img" loading="lazy" onerror="this.classList.add('is-broken')">
-          <div class="book-fallback">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-            <span>Quiénes fueron los Davis</span>
-          </div>
-        </div>
-        <div class="book-info">
-          <h2 class="book-title">¿Quiénes fueron los Davis? (fin.n Hamilton)</h2>
-          <div class="book-meta">2 Borradores</div>
-        </div>
-        <div class="book-actions">
-          <button class="btn-read" 
-            data-title="¿Quiénes fueron los Davis? (fin.n Hamilton)" 
-            data-cover="quienes-fueron-los-davis-fin-hamilton.jpg"
-            data-pages="16"
-            data-status="En progreso"
-            data-drafts="2">Leer cuento</button>
-          <button class="btn-more" aria-label="Más opciones">•••</button>
-        </div>
-      </article>
+          <p><strong>Listas y tuplas:</strong> Python ofrece estructuras de datos como listas y tuplas para almacenar colecciones de elementos. Las listas son mutables, mientras que las tuplas son inmutables.</p>
+          <pre><code># Ejemplo de listas y tuplas
+mi_lista = [1, 2, 3, 4, 5]
+mi_tupla = (1, 2, 3, 4, 5)
 
-      <!-- 13 -->
-      <article class="book-item">
-        <div class="book-cover">
-          <img src="la-musica.jpg" alt="Portada LA MÚSICA" class="book-img" loading="lazy" onerror="this.classList.add('is-broken')">
-          <div class="book-fallback">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-            <span>LA MÚSICA</span>
-          </div>
-        </div>
-        <div class="book-info">
-          <h2 class="book-title">LA MÚSICA</h2>
-          <div class="book-meta">1 Borrador</div>
-        </div>
-        <div class="book-actions">
-          <button class="btn-read" 
-            data-title="LA MÚSICA" 
-            data-cover="la-musica.jpg"
-            data-pages="10"
-            data-status="En progreso"
-            data-drafts="1">Leer cuento</button>
-          <button class="btn-more" aria-label="Más opciones">•••</button>
-        </div>
-      </article>
+mi_lista[0] = 6
+# mi_tupla[0] = 6 Esto generaría un error, las tuplas son inmutables</code></pre>
 
-      <!-- 14 -->
-      <article class="book-item">
-        <div class="book-cover">
-          <img src="conoce-tu-pc.jpg" alt="Portada conoce tu pc" class="book-img" loading="lazy" onerror="this.classList.add('is-broken')">
-          <div class="book-fallback">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-            <span>conoce tu pc</span>
-          </div>
-        </div>
-        <div class="book-info">
-          <h2 class="book-title">conoce tu pc</h2>
-          <div class="book-meta">19 Partes Publicadas</div>
-        </div>
-        <div class="book-actions">
-          <button class="btn-read" 
-            data-title="conoce tu pc" 
-            data-cover="conoce-tu-pc.jpg"
-            data-pages="120"
-            data-status="Publicado (19 partes)"
-            data-drafts="0">Leer cuento</button>
-          <button class="btn-more" aria-label="Más opciones">•••</button>
-        </div>
-      </article>
+          <p><strong>Diccionarios:</strong> Los diccionarios son colecciones de pares clave-valor que te permiten almacenar y recuperar datos de manera eficiente.</p>
+          <pre><code># Ejemplo de diccionarios
+mi_diccionario = {"nombre": "Juan", "edad": 30, "ciudad": "Madrid"}
+print(mi_diccionario["nombre"])</code></pre>
 
-      <!-- 15 -->
-      <article class="book-item">
-        <div class="book-cover">
-          <img src="dentro-de-macos.jpg" alt="Portada Dentro de MacOS" class="book-img" loading="lazy" onerror="this.classList.add('is-broken')">
-          <div class="book-fallback">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-            <span>Dentro de MacOS</span>
-          </div>
-        </div>
-        <div class="book-info">
-          <h2 class="book-title">Dentro de MacOS</h2>
-          <div class="book-meta">1 Borrador</div>
-        </div>
-        <div class="book-actions">
-          <button class="btn-read" 
-            data-title="Dentro de MacOS" 
-            data-cover="dentro-de-macos.jpg"
-            data-pages="14"
-            data-status="En progreso"
-            data-drafts="1">Leer cuento</button>
-          <button class="btn-more" aria-label="Más opciones">•••</button>
-        </div>
-      </article>
+          <h3>Estructuras Condicionales y Bucles</h3>
+          <p>Las estructuras condicionales en Python, como en muchos otros lenguajes de programación, te permiten controlar el flujo de ejecución del programa en función de condiciones específicas. En Python, las estructuras condicionales se definen con las palabras clave <code>if</code>, <code>elif</code> y <code>else</code>.</p>
+          <pre><code># Ejemplo de estructura condicional if-elif-else
+edad = 25
 
-      <!-- 16 -->
-      <article class="book-item">
-        <div class="book-cover">
-          <img src="html-vol-1.jpg" alt="Portada (HTML) | vol. 1" class="book-img" loading="lazy" onerror="this.classList.add('is-broken')">
-          <div class="book-fallback">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-            <span>(HTML) | vol. 1</span>
-          </div>
-        </div>
-        <div class="book-info">
-          <h2 class="book-title">(HTML) | vol. 1</h2>
-          <div class="book-meta">8 Partes Publicadas</div>
-        </div>
-        <div class="book-actions">
-          <button class="btn-read" 
-            data-title="(HTML) | vol. 1" 
-            data-cover="html-vol-1.jpg"
-            data-pages="55"
-            data-status="Publicado (8 partes)"
-            data-drafts="0">Leer cuento</button>
-          <button class="btn-more" aria-label="Más opciones">•••</button>
-        </div>
-      </article>
+if edad < 18:
+    print("Eres menor de edad")
+elif edad >= 18 and edad < 65:
+    print("Eres adulto")
+else:
+    print("Eres un adulto mayor")</code></pre>
+          <p>Es importante tener en cuenta que en Python la indentación es crucial para determinar qué líneas de código pertenecen a cada bloque condicional.</p>
 
-      <!-- 17 -->
-      <article class="book-item">
-        <div class="book-cover">
-          <img src="empezando-javascript.jpg" alt="Portada Empezando JavaScript" class="book-img" loading="lazy" onerror="this.classList.add('is-broken')">
-          <div class="book-fallback">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-            <span>Empezando JavaScript</span>
-          </div>
-        </div>
-        <div class="book-info">
-          <h2 class="book-title">Empezando JavaScript</h2>
-          <div class="book-meta">2 Borradores</div>
-        </div>
-        <div class="book-actions">
-          <button class="btn-read" 
-            data-title="Empezando JavaScript" 
-            data-cover="empezando-javascript.jpg"
-            data-pages="20"
-            data-status="En progreso"
-            data-drafts="2">Leer cuento</button>
-          <button class="btn-more" aria-label="Más opciones">•••</button>
+          <p><strong>Bucle for:</strong> Se utiliza para iterar sobre una secuencia de elementos (como una lista, tupla, cadena o rango) y ejecutar un bloque de código una vez por cada elemento en la secuencia.</p>
+          <pre><code># Ejemplo de bucle for
+for i in range(5):
+    print(i) # Itera sobre los números del 0 al 4</code></pre>
+
+          <p><strong>Bucle while:</strong> Se utiliza para repetir un bloque de código mientras una condición especificada sea verdadera.</p>
+          <pre><code># Ejemplo de bucle while
+contador = 0
+while contador < 5:
+    print(contador)
+    contador += 1</code></pre>
+
+          <p><strong>Break y Continue:</strong> Son palabras clave para controlar el flujo de ejecución dentro de los bucles.</p>
+          <pre><code># Ejemplo de break y continue
+for i in range(10):
+    if i == 3:
+        continue # Salta la iteración actual si i es igual a 3
+    if i == 7:
+        break # Sale del bucle si i es igual a 7
+    print(i)</code></pre>
+
+          <h3>Comprensión de Listas</h3>
+          <p>La comprensión de listas en Python es una forma concisa y elegante de crear listas basadas en iteraciones o aplicando operaciones a una secuencia de elementos. Es una característica poderosa que permite escribir código más legible y compacto.</p>
+          <p>La sintaxis general es: <code>[expresión for elemento in iterable if condición]</code></p>
+          <pre><code># Ejemplo 1: Crear una lista de los cuadrados de los números del 0 al 9
+cuadrados = [x**2 for x in range(10)]
+print(cuadrados) 
+# Output: [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
+
+# Ejemplo 2: Filtrar los números pares de una lista
+numeros = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+pares = [x for x in numeros if x % 2 == 0]
+print(pares) 
+# Output: [2, 4, 6, 8, 10]</code></pre>
+
+          <h3>Funciones y Módulos</h3>
+          <p>Las funciones en Python son bloques de código reutilizables que realizan una tarea específica. Puedes definir tus propias funciones utilizando la palabra clave <code>def</code>.</p>
+          <pre><code>def saludar(nombre):
+    print("Hola,", nombre)
+
+saludar("Juan") # Output: Hola, Juan</code></pre>
+          <p>Los módulos en Python son archivos que contienen definiciones y declaraciones de Python. Puedes importarlos en tu programa para usarlos, como el módulo <code>math</code>.</p>
+          <pre><code># Importar el módulo de matemáticas
+import math
+print(math.sqrt(25)) # Output: 5.0
+
+# O importar solo una función
+from math import sqrt
+print(sqrt(25)) # Output: 5.0</code></pre>
+
+          <h3>Trabajo con Datos</h3>
+          <p>Trabajar con datos en Python es una tarea común y muy poderosa gracias a las numerosas bibliotecas disponibles. Algunas de las más populares incluyen:</p>
+          <p><strong>Pandas:</strong> Es una biblioteca de análisis de datos que proporciona estructuras de datos flexibles y eficientes, como DataFrames, para manipular y analizar datos tabulares.</p>
+          <p><strong>NumPy:</strong> Es una biblioteca fundamental para la computación científica en Python. Proporciona soporte para arrays y matrices multidimensionales, junto con una colección de funciones matemáticas para operar sobre ellos.</p>
+          <p><strong>Matplotlib:</strong> Es una biblioteca de visualización de datos que permite crear una amplia variedad de gráficos estáticos, animados e interactivos en Python.</p>
+          <p><strong>Scikit-learn:</strong> Es una biblioteca de aprendizaje automático que proporciona herramientas simples y eficientes para el análisis predictivo de datos, incluyendo clasificación, regresión, clustering y reducción de dimensionalidad.</p>
         </div>
       </article>
 
@@ -797,91 +770,99 @@
        ============================================================ -->
   <div class="reader-overlay" id="readerOverlay">
     <div class="reader-modal">
-      
       <div class="reader-header">
-        <h2 id="readerTitle">Título del cuento</h2>
-        <button class="reader-close" id="readerClose" aria-label="Cerrar lector">
+        <h2 id="readerTitle">Título del Cuento</h2>
+        <button class="reader-close" id="readerCloseBtn" aria-label="Cerrar lector">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M18 6 6 18M6 6l12 12"/>
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
           </svg>
         </button>
       </div>
-
-      <div class="reader-body">
-        <!-- Imagen Grande -->
-        <img src="" alt="Portada en grande" class="reader-cover-large" id="readerImage">
-        
-        <!-- Info del Cuento -->
-        <div class="reader-info-box">
-          <h3>Información del cuento</h3>
-          <div class="reader-info-row">
-            <span class="reader-info-label">Estado:</span>
-            <span class="reader-info-value" id="readerStatus">-</span>
-          </div>
-          <div class="reader-info-row">
-            <span class="reader-info-label">Páginas:</span>
-            <span class="reader-info-value" id="readerPages">-</span>
-          </div>
-          <div class="reader-info-row">
-            <span class="reader-info-label">Borradores:</span>
-            <span class="reader-info-value" id="readerDrafts">-</span>
-          </div>
-          <div class="reader-info-row">
-            <span class="reader-info-label">Autor:</span>
-            <span class="reader-info-value">Ju4n_Brun4</span>
+      <div class="reader-body" id="readerBody">
+        <div class="reader-top">
+          <img id="readerCover" src="" alt="Portada" class="reader-cover-large">
+          <div class="reader-info-box">
+            <div class="reader-info-row">
+              <span class="reader-info-label">Estado</span>
+              <span class="reader-info-value" id="readerStatus">En progreso</span>
+            </div>
+            <div class="reader-info-row">
+              <span class="reader-info-label">Páginas</span>
+              <span class="reader-info-value" id="readerPages">0</span>
+            </div>
+            <div class="reader-info-row">
+              <span class="reader-info-label">Borradores</span>
+              <span class="reader-info-value" id="readerDrafts">0</span>
+            </div>
           </div>
         </div>
+        <div class="reader-text" id="readerTextContent">
+          <!-- El texto del cuento se inyectará aquí -->
+        </div>
       </div>
-
     </div>
   </div>
 
+  <!-- ============================================================
+       JAVASCRIPT PARA EL FUNCIONAMIENTO
+       ============================================================ -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      // Elementos del DOM
       const overlay = document.getElementById('readerOverlay');
-      const closeBtn = document.getElementById('readerClose');
-      const buttons = document.querySelectorAll('.btn-read');
+      const closeBtn = document.getElementById('readerCloseBtn');
+      const readerTitle = document.getElementById('readerTitle');
+      const readerCover = document.getElementById('readerCover');
+      const readerStatus = document.getElementById('readerStatus');
+      const readerPages = document.getElementById('readerPages');
+      const readerDrafts = document.getElementById('readerDrafts');
+      const readerTextContent = document.getElementById('readerTextContent');
+      const readButtons = document.querySelectorAll('.btn-read');
 
-      // Elementos dentro del lector
-      const uiTitle = document.getElementById('readerTitle');
-      const uiImage = document.getElementById('readerImage');
-      const uiStatus = document.getElementById('readerStatus');
-      const uiPages = document.getElementById('readerPages');
-      const uiDrafts = document.getElementById('readerDrafts');
+      // Función para abrir el lector
+      readButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          // Obtener los datos del botón
+          const title = button.getAttribute('data-title');
+          const cover = button.getAttribute('data-cover');
+          const status = button.getAttribute('data-status');
+          const pages = button.getAttribute('data-pages');
+          const drafts = button.getAttribute('data-drafts');
 
-      // Abrir Lector
-      buttons.forEach(btn => {
-        btn.addEventListener('click', function() {
-          // Obtener datos del botón presionado
-          const title = this.getAttribute('data-title');
-          const cover = this.getAttribute('data-cover');
-          const status = this.getAttribute('data-status');
-          const pages = this.getAttribute('data-pages');
-          const drafts = this.getAttribute('data-drafts');
+          // Obtener el contenido del cuento desde el artículo padre
+          const article = button.closest('.book-item');
+          const contentDiv = article.querySelector('.book-content');
+          const contentHTML = contentDiv.innerHTML;
 
-          // Inyectar datos en el modal
-          uiTitle.textContent = title;
-          uiImage.src = cover;
-          uiStatus.textContent = status;
-          uiPages.textContent = pages + ' páginas';
-          uiDrafts.textContent = drafts;
-
-          // Manejo de error por si la imagen no existe
-          uiImage.onerror = function() {
-            this.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="290" fill="%231f1f2b"><rect width="100%" height="100%"/><text x="50%" y="50%" fill="%23a0a0b8" font-family="sans-serif" font-size="14" text-anchor="middle" dominant-baseline="middle">Sin portada</text></svg>';
+          // Actualizar el modal con los datos
+          readerTitle.textContent = title;
+          
+          // Manejar la portada (si falla, usar fallback)
+          readerCover.src = cover;
+          readerCover.onerror = function() {
+            this.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="180" height="260" viewBox="0 0 24 24" fill="none" stroke="%23d4af37" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>';
+            this.style.background = '#26211c';
+            this.style.padding = '20px';
           };
 
-          // Mostrar Modal
+          readerStatus.textContent = status;
+          readerPages.textContent = pages;
+          readerDrafts.textContent = drafts;
+          
+          // Inyectar el texto
+          readerTextContent.innerHTML = contentHTML;
+
+          // Mostrar el modal
           overlay.classList.add('active');
-          document.body.style.overflow = 'hidden'; // Evitar scroll de fondo
+          
+          // Reiniciar scroll al inicio
+          document.getElementById('readerBody').scrollTop = 0;
         });
       });
 
-      // Cerrar Lector
+      // Función para cerrar el lector
       const closeReader = () => {
         overlay.classList.remove('active');
-        document.body.style.overflow = ''; // Restaurar scroll
       };
 
       closeBtn.addEventListener('click', closeReader);
